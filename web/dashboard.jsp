@@ -90,7 +90,7 @@
 									</div>
 									<div class="profile-info">
 										<h4 class="heading">Mi perfil</h4>
-										<p>Interactively fashion excellent information after distinctive outsourcing.</p>
+										<p>Analista Desarrollador con habilidades en el desarrollo de modelos matemáticos, la simulación y el análisis ...</p>
 									</div>
 									<div class="text-center"><a href="#" class="btn btn-primary">Editar perfil</a></div>
 								</div>
@@ -108,7 +108,7 @@
 												<div class="hexagon">
 													<span class="lnr lnr-sun award-icon"></span>
 												</div>
-												<span>Most Bright Idea</span>
+												<span>Trabajo limpio</span>
 											</div>
 										</div>
 										<div class="col-md-3 col-sm-6">
@@ -116,7 +116,7 @@
 												<div class="hexagon">
 													<span class="lnr lnr-clock award-icon"></span>
 												</div>
-												<span>Most On-Time</span>
+												<span>Puntualidad</span>
 											</div>
 										</div>
 										<div class="col-md-3 col-sm-6">
@@ -124,7 +124,7 @@
 												<div class="hexagon">
 													<span class="lnr lnr-magic-wand award-icon"></span>
 												</div>
-												<span>Problem Solver</span>
+												<span>Solucionador de problemas</span>
 											</div>
 										</div>
 										<div class="col-md-3 col-sm-6">
@@ -132,7 +132,7 @@
 												<div class="hexagon">
 													<span class="lnr lnr-heart award-icon"></span>
 												</div>
-												<span>Most Loved</span>
+												<span>Compañerismo</span>
 											</div>
 										</div>
 									</div>
@@ -151,22 +151,22 @@
 										<ul class="list-unstyled activity-timeline">
 											<li>
 												<i class="fa fa-comment activity-icon"></i>
-												<p>Commented on post <a href="#">Prototyping</a> <span class="timestamp">2 minutes ago</span></p>
+												<p>Comentario en <a href="#">propuesta  repositorios</a> <span class="timestamp">09/03/2017 21:09</span></p>
 											</li>
 											<li>
 												<i class="fa fa-cloud-upload activity-icon"></i>
-												<p>Uploaded new file <a href="#">Proposal.docx</a> to project <a href="#">New Year Campaign</a> <span class="timestamp">7 hours ago</span></p>
+												<p>Carga de archivo <a href="#">Proposal.docx</a> en el módulo <a href="#">Áreas</a> <span class="timestamp">09/02/2017 07:26</span></p>
 											</li>
 											<li>
 												<i class="fa fa-plus activity-icon"></i>
-												<p>Added <a href="#">Martin</a> and <a href="#">3 others colleagues</a> to project repository <span class="timestamp">Yesterday</span></p>
+												<p>Nuevos empleados <span class="timestamp">08/03/2017 16:11</span></p>
 											</li>
 											<li>
 												<i class="fa fa-check activity-icon"></i>
-												<p>Finished 80% of all <a href="#">assigned tasks</a> <span class="timestamp">1 day ago</span></p>
+												<p>Configuración de perfil completa <span class="timestamp">08/03/2017 07:27</span></p>
 											</li>
 										</ul>
-										<div class="margin-top-30 text-center"><a href="#" class="btn btn-default">See all activity</a></div>
+										<div class="margin-top-30 text-center"><a href="#" class="btn btn-default">Ver toda mi actividad</a></div>
 									</div>
 									<div class="tab-pane fade" id="tab-bottom-left2">
 										<div class="table-responsive">
@@ -184,33 +184,33 @@
 														<td>
 															<div class="progress">
 																<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-																	<span>60% Complete</span>
+																	<span>60%</span>
 																</div>
 															</div>
 														</td>
-														<td><span class="label label-success">ACTIVE</span></td>
+														<td><span class="label label-success">ACTIVO</span></td>
 													</tr>
 													<tr>
 														<td><a href="#">E-Commerce Site</a></td>
 														<td>
 															<div class="progress">
 																<div class="progress-bar" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" style="width: 33%;">
-																	<span>33% Complete</span>
+																	<span>33%</span>
 																</div>
 															</div>
 														</td>
-														<td><span class="label label-warning">PENDING</span></td>
+														<td><span class="label label-warning">PENDIENTE</span></td>
 													</tr>
 													<tr>
 														<td><a href="#">Project 123GO</a></td>
 														<td>
 															<div class="progress">
 																<div class="progress-bar" role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100" style="width: 68%;">
-																	<span>68% Complete</span>
+																	<span>68%</span>
 																</div>
 															</div>
 														</td>
-														<td><span class="label label-success">ACTIVE</span></td>
+														<td><span class="label label-success">ACTIVO</span></td>
 													</tr>
 													<tr>
 														<td><a href="#">Wordpress Theme</a></td>
@@ -221,7 +221,7 @@
 																</div>
 															</div>
 														</td>
-														<td><span class="label label-success">ACTIVE</span></td>
+														<td><span class="label label-success">ACTIVO</span></td>
 													</tr>
 													<tr>
 														<td><a href="#">Project 123GO</a></td>
@@ -232,7 +232,7 @@
 																</div>
 															</div>
 														</td>
-														<td><span class="label label-default">CLOSED</span></td>
+														<td><span class="label label-default">CERRADO</span></td>
 													</tr>
 													<tr>
 														<td><a href="#">Redesign Landing Page</a></td>
@@ -243,7 +243,7 @@
 																</div>
 															</div>
 														</td>
-														<td><span class="label label-default">CLOSED</span></td>
+														<td><span class="label label-default">CERRADO</span></td>
 													</tr>
 												</tbody>
 											</table>

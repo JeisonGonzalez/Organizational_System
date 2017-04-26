@@ -5,7 +5,7 @@
  */
 package Persistencia;
 
-import Entidades.Usuarios;
+import Entidades.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,14 +16,14 @@ import java.sql.ResultSet;
  */
 public class DaoIngreso {
     
-    public Usuarios ValidarIngreso(Connection con, String correo, String contraseña) {
-        Usuarios usuario = new Usuarios();
+    public Usuario ValidarIngreso(Connection con, String correo, String contraseña) {
+        Usuario usuario = new Usuario();
         //usuario.setIdUsuario("0");
         try {
             PreparedStatement p = con.prepareStatement(SQLHelpers.getValidarIngreso(correo, contraseña));
             ResultSet r = p.executeQuery();
             while (r.next()) {
-                usuario.setIdUsuario(r.getString(1));
+                usuario.setIdUsuario(r.getInt(1));
                 usuario.setNombre(r.getString(2));
                 usuario.setClave(r.getString(3));
                 usuario.setCorreo(r.getString(4));

@@ -1,16 +1,16 @@
 package Entidades;
-public class Usuarios {
+public class Usuario {
     
-    String idUsuario;
+    int idUsuario;
     String nombre;
     String clave;
     String correo;
     String idPerfil;
 
-    public Usuarios() {
+    public Usuario() {
     }
 
-    public Usuarios(String idUsuario, String nombre, String clave, String correo, String idPerfil) {
+    public Usuario(int idUsuario, String nombre, String clave, String correo, String idPerfil) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.clave = clave;
@@ -18,11 +18,11 @@ public class Usuarios {
         this.idPerfil = idPerfil;
     }
 
-    public String getIdUsuario() {
+    public int getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(String idUsuario) {
+    public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
 
@@ -57,7 +57,5 @@ public class Usuarios {
     public void setIdPerfil(String idPerfil) {
         this.idPerfil = idPerfil;
     }
-    
-    
     
 }

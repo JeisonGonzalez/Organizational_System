@@ -1,6 +1,6 @@
 package Negocio;
 
-import Entidades.Usuarios;
+import Entidades.Usuario;
 import Persistencia.DaoIngreso;
 import Utilidades.Conexion;
 import java.sql.Connection;
@@ -13,7 +13,7 @@ public class LoginN {
         dao = new DaoIngreso();
     }
 
-    public Usuarios ValidarIngreso(String correo, String clave) throws SQLException {
+    public Usuario ValidarIngreso(String correo, String clave) throws SQLException {
         Connection con;
         con = new Conexion().getCon();
         return dao.ValidarIngreso(con, correo, clave);

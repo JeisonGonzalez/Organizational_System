@@ -5,6 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    String clave = request.getParameter("clave");
+    String correo = request.getParameter("correo");
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,14 +39,14 @@
 					<div class="left">
 						<div class="content">
 							<h2>Organizational System</h2>
-							<form class="form-auth-small" action="index.html">
+                                                        <form class="form-horizontal" method="post" action="./loginServlet">
 								<div class="form-group">
-									<label for="signup-email" class="control-label sr-only">Correo electrónico</label>
-									<input type="email" class="form-control" id="signup-email" value="samuel.gold@domain.com" placeholder="Email">
+									<label for="correo" class="control-label sr-only">Correo electrónico</label>
+									<input type="email" class="form-control" name="correo" id="correo" placeholder="Ingrese correo de usuario">
 								</div>
 								<div class="form-group">
-									<label for="signup-password" class="control-label sr-only">Contraseña</label>
-									<input type="password" class="form-control" id="signup-password" value="thisisthepassword" placeholder="Password">
+									<label for="clave" class="control-label sr-only">Contraseña</label>
+									<input type="password" class="form-control" id="clave" name="clave" placeholder="Ingrese contraseña de usuario ...">
 								</div>
 								<div class="form-group clearfix">
 									<label class="fancy-checkbox element-left">
@@ -50,7 +54,7 @@
 										<span>Recordarme</span>
 									</label>
 								</div>
-                                                            <button type="submit" class="btn btn-primary btn-lg btn-block"><a href="dashboard.jsp">Ingresar</a></button>
+                                                            <button type="submit" id="accion" name="accion" value="ingresar" class="btn btn-primary btn-lg btn-block">Ingresar</button>
 								<div class="bottom">
 									<span><i class="fa fa-lock"></i> <a href="#">¿ Olvidó su contraseña ?</a></span>
 								</div>

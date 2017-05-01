@@ -20,8 +20,8 @@ public class loginServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String mensajes = "";
         String clave = request.getParameter("clave");
-        String correo = request.getParameter("clave");
-        String accion = request.getParameter("action");
+        String correo = request.getParameter("correo");
+        String accion = request.getParameter("accion");
         
         UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
 

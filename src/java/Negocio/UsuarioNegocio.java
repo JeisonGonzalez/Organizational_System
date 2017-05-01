@@ -24,6 +24,17 @@ public class UsuarioNegocio {
             return null;
         }
     }
+    
+    public Boolean getUserByLogin (String clave, String correo) {
+        Boolean response = false;
+        try {
+            conexion = (Connection) Conexion.getCon();
+            response = daoUsuario.getUserByLogin(conexion, clave, correo);
+        } catch (Exception e) {
+            System.out.println("Excepción al buscar registrio en la lista de usuarios en getUserByParams.java :"+e);
+        }
+        return response;
+    }
 
     public List<Usuario> getUserById (int idUsuario) {
         try {

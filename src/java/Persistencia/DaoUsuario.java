@@ -29,6 +29,18 @@ public class DaoUsuario {
         return userList;
     }
     
+        public Boolean getUserByLogin (Connection conexion, String correo, String clave) {
+        Boolean response = false;
+        try {
+            PreparedStatement preparedStatement = (PreparedStatement) conexion.prepareStatement(SQLHelpers.getUserByLogin(correo,clave));
+            ResultSet resultSet = preparedStatement.executeQuery();
+            
+        } catch (Exception e) {
+            System.out.println("Error en DaoEmpresa / ListadoEmpresas : "+e);
+        }
+        return response;
+    }
+        
     public List<Usuario> getUserById(Connection conexion, int idUsuario) {
         List<Usuario> userList = new ArrayList<>();
         try {

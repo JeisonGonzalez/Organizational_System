@@ -17,6 +17,10 @@ public class SQLHelpers {
         return "SELECT * FROM usuario where idUsuario = " + idUsuario;
     }
     
+    public static String getUserByLogin (String clave, String correo){
+        return "SELECT COUNT(*) FROM usuario WHERE clave = " + clave + "correo = " + correo;
+    }
+    
     public static String updateUser (int idUsuario){
         return "UPDATE usuario SET nombre=?, clave=?, correo=?, idPerfil=? WHERE idUsuario = " + idUsuario;
     }

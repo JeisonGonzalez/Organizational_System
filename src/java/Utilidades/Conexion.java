@@ -14,7 +14,7 @@ public class Conexion {
         if (cnx == null) {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                cnx = DriverManager.getConnection("jdbc:mysql://localhost/proyectodesarrollodb", "root", "");
+                cnx = DriverManager.getConnection("jdbc:mysql://localhost/organizationalsystemdb", "root", "");
             } catch (SQLException ex) {
                 throw new SQLException(ex);
             } catch (ClassNotFoundException ex) {
@@ -23,30 +23,22 @@ public class Conexion {
         }
         return cnx;
     }
-
-//    public static void cerrar() throws SQLException {
-//        if (cnx != null) {
-//            cnx.close();
-//        }
-//    }
-
-    public static String main(String[] args) {
-        Conexion conectar = new Conexion();
+    
+    public static void main(String[] args) {
         try {
-            ResultSet r = conectar.getCon().prepareStatement(SQLHelpers.getValidarIngreso("checho9991@hotmail.com", "123")).executeQuery();
-            if (r.next()) {
-                String user = (r.getString(1) + " -> " + r.getString(2) + " -> " + r.getString(3) + " -> " + r.getString(4));
-                System.out.println(user);
-                return user;
+            System.out.println("-------------------------- Creando conexión a DB : --------------------------");
+            System.out.println();
+            ResultSet resulSet = Conexion.getCon().prepareStatement(SQLHelpers.getUserList(-1, null, null, null, -1, -1, null, null)).executeQuery();
+            if (resulSet.next()) {
+                System.out.println("CONEXIÓN ESTABLECIDA CORRECTAMENTE");
+                System.out.println("");
+                System.out.println("");
             } else {
-                System.out.println("No hay registros");
+                System.out.println("No hay registros o no se ha conectado correctamente a la DB");
             }
-            return "No se ha podido conectar a la db";
         } catch (Exception e) {
             System.out.println("Exception creando conexión"+ e.getMessage());
-        } finally {
         }
-        return "No se ha podido conectar a la db";
     }
 
 }

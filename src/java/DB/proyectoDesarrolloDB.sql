@@ -50,6 +50,9 @@ CREATE TABLE IF NOT EXISTS `OrganizationalSystemDB`.`Usuario` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+ALTER TABLE usuario ADD inSession INT NOT NULL;
+ALTER TABLE usuario ADD fechaNacimiento varchar(50) NOT NULL;
+ALTER TABLE usuario ADD imagenPerfil varchar(100) NOT NULL;
 
 -- -----------------------------------------------------
 -- Table `OrganizationalSystemDB`.`Area`
@@ -183,24 +186,26 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `OrganizationalSystemDB`.`PerfilxArea`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `OrganizationalSystemDB`.`PerfilxArea` (
-  `idPerfil` INT NOT NULL,
-  `idArea` INT NOT NULL,
-  INDEX `fk_area_perfil_idx` (`idPerfil` ASC, `idArea` ASC),
-  INDEX `fk_perfil_area_idx` (`idArea` ASC),
-  CONSTRAINT `fk_perfil_area`
-    FOREIGN KEY (`idArea`)
-    REFERENCES `OrganizationalSystemDB`.`Perfil` (`idPerfil`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_area_perfil`
-    FOREIGN KEY (`idPerfil` , `idArea`)
-    REFERENCES `OrganizationalSystemDB`.`Area` (`idArea` , `idArea`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
+-- CREATE TABLE IF NOT EXISTS `OrganizationalSystemDB`.`PerfilxArea` (
+--   `idPerfil` INT NOT NULL,
+--   `idArea` INT NOT NULL,
+--   INDEX `fk_area_perfil_idx` (`idPerfil` ASC, `idArea` ASC),
+--   INDEX `fk_perfil_area_idx` (`idArea` ASC),
+--   CONSTRAINT `fk_perfil_area`
+--     FOREIGN KEY (`idArea`)
+--     REFERENCES `OrganizationalSystemDB`.`Perfil` (`idPerfil`)
+--     ON DELETE NO ACTION
+--     ON UPDATE NO ACTION,
+--   CONSTRAINT `fk_area_perfil`
+--     FOREIGN KEY (`idPerfil` , `idArea`)
+--     REFERENCES `OrganizationalSystemDB`.`Area` (`idArea` , `idArea`)
+--     ON DELETE NO ACTION
+--     ON UPDATE NO ACTION)
+-- ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+INSERT INTO `area`(`idArea`, `nombre`, `descripcion`, `padre`) VALUES (1,'Desarrollo','En esta área de la compañía se encuentran los desarrolladores de software pertenecientes a ésta',null);
+INSERT INTO `perfil`(`idPerfil`, `idArea`, `nombre`, `descripcion`, `padre`) VALUES (1,1,'Administrador','Este perfil dispone de un control total del software de la compañía',null);
+INSERT INTO `usuario`(`nombre`, `clave`, `correo`, `idPerfil`, `inSession`, `fechaNacimiento`, `imagenPerfil`) VALUES ('Jeison González Cifuentes', '123', 'jeison_gonzalez23161@elpoli.edu.co','1',0,'12/03/1999','/perfil.jgp');

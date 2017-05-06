@@ -11,7 +11,7 @@ public class SQLHelpers {
     //-------------------------------------- USUARIO --------------------------------------
     public static String getUserList(int idUsuario, String nombre, String clave, String correo, int idPerfil, int inSession, String fechaNacimiento, String imagenPerfil){
         String select = "SELECT * FROM usuario WHERE 1 = 1";
-        if (idUsuario >= 0) {
+        if (idUsuario > 0) {
             select += " AND idUsuario = " + idUsuario;
         }
         if (nombre != null && !nombre.isEmpty()) {
@@ -23,10 +23,10 @@ public class SQLHelpers {
         if (correo != null && !correo.isEmpty()) {
             select += " AND correo = '" + correo + "'";
         }
-        if (idPerfil >= 0) {
+        if (idPerfil > 0) {
             select += " AND idPerfil = " + idPerfil;
         }
-        if (inSession >= 0) {
+        if (inSession > 0) {
             select += " AND inSession = " + inSession;
         }
         if (fechaNacimiento != null && !fechaNacimiento.isEmpty()) {
@@ -36,10 +36,6 @@ public class SQLHelpers {
             select += " AND imagenPerfil = '" + imagenPerfil + "'";
         }
         return select;
-    }
-
-    public static String getUserById(int idUsuario){
-        return "SELECT * FROM usuario where idUsuario = " + idUsuario;
     }
     
     public static String getUserByLogin (String clave, String correo){

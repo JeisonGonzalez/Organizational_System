@@ -1,23 +1,56 @@
 package Entidades;
+
+import java.sql.Date;
+
 public class Usuario {
     
     int idUsuario;
     String nombre;
     String clave;
     String correo;
-    String idPerfil;
-
+    int idPerfil;
+    int inSession;
+    String fechaNacimiento;
+    String imagenPerfil;
+    
     public Usuario() {
     }
 
-    public Usuario(int idUsuario, String nombre, String clave, String correo, String idPerfil) {
+    public Usuario(int idUsuario, String nombre, String clave, String correo, int idPerfil, int inSession, String fechaNacimiento, String imagenPerfil) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.clave = clave;
         this.correo = correo;
         this.idPerfil = idPerfil;
+        this.inSession = inSession;
+        this.fechaNacimiento = fechaNacimiento;
+        this.imagenPerfil = imagenPerfil;
     }
 
+    public String getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+    
+    public int getInSession() {
+        return inSession;
+    }
+
+    public void setInSession(int inSession) {
+        this.inSession = inSession;
+    }
+
+    public String getImagenPerfil() {
+        return imagenPerfil;
+    }
+
+    public void setImagenPerfil(String imagenPerfil) {
+        this.imagenPerfil = imagenPerfil;
+    }
+    
     public int getIdUsuario() {
         return idUsuario;
     }
@@ -50,11 +83,11 @@ public class Usuario {
         this.correo = correo;
     }
 
-    public String getIdPerfil() {
+    public int getIdPerfil() {
         return idPerfil;
     }
 
-    public void setIdPerfil(String idPerfil) {
+    public void setIdPerfil(int idPerfil) {
         this.idPerfil = idPerfil;
     }
     

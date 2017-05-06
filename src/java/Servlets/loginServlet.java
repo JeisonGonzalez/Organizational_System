@@ -21,24 +21,29 @@ public class loginServlet extends HttpServlet {
         String mensajes = "";
         String clave = request.getParameter("clave");
         String correo = request.getParameter("correo");
-        String accion = request.getParameter("accion");
+        String action = request.getParameter("action");
         
-        UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-        Boolean userSession = false;
-        //Realizar acciones
-        if (accion.equalsIgnoreCase("Ingresar")) {
-            try {
-                List<Usuario> getUserSession = usuarioNegocio.getUserList(-1, null, clave, correo, -1, -1, null, null);
-                if (getUserSession.size() > 0) {
-                    userSession = true;
+        if (clave != null && !clave.isEmpty() && correo != null && !correo.isEmpty()) {
+            UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+            //Realizar acciones
+            if (action.equalsIgnoreCase("Ingresar")) {
+                try {
+                    List<Usuario> getUserSession = usuarioNegocio.getUserList(-1, null, clave, correo, -1, -1, null, null);
+                    if (getUserSession.size() > 0) {
+                        request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
+                    } else {
+                        request.setAttribute("message", "Usuario o contraseña incorrectos");
+                        request.getRequestDispatcher("/index.jsp").forward(request, response);
+                    }
+                } catch (Exception e) {
+                    mensajes += "<br/> Error : Error obteniendo usuario para el ingreso al sistema";
+                    System.out.println("Error obteniendo usuario para el ingreso al sistema : " + e);
                 }
-            } catch (Exception e) {
-                mensajes += "<br/> Error : No se pudo guardar el registro";
-                System.out.println("Error obteniendo método get Guardar : " + e);
             }
+        } else {
+            request.setAttribute("message", "Debe ingresar un usuario y una contraseña");
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
-        request.setAttribute("userSession", userSession);
-        request.getRequestDispatcher("/Empleado.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

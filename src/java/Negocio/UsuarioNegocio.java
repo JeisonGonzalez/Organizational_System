@@ -20,17 +20,7 @@ public class UsuarioNegocio {
             conexion = (Connection) Conexion.getCon();
             return (List<Usuario>) daoUsuario.getUserList(conexion, idUsuario, nombre, clave, correo, idPerfil, inSession, fechaNacimiento, imagenPerfil);
         } catch (Exception e) {
-            System.out.println("Excepción al buscar lista de usuarios en UsuarioNegocio.java :"+e);
-            return null;
-        }
-    }
-    
-    public List<Usuario> getUserById (int idUsuario) {
-        try {
-            conexion = (Connection) Conexion.getCon();
-            return (List<Usuario>) daoUsuario.getUserById(conexion, idUsuario);
-        } catch (Exception e) {
-            System.out.println("Excepción al buscar registrio en la lista de usuarios en UsuarioNegocio.java :"+e);
+            System.out.println("Excepción al buscar lista de usuarios en UsuarioNegocio.java : " + e);
             return null;
         }
     }

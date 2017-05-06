@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    String userSession = request.getParameter("userSession");
+    String message = request.getParameter("message");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,27 +36,28 @@
 			<div class="vertical-align-middle">
 				<div class="auth-box ">
 					<div class="left">
-						<div class="content">
-							<h2>Organizational System</h2>
-                                                        <form class="form-horizontal" method="post" action="./loginServlet">
-								<div class="form-group">
-									<label for="correo" class="control-label sr-only">Correo electrónico</label>
-									<input type="email" class="form-control" name="correo" id="correo" placeholder="Ingrese correo de usuario">
-								</div>
-								<div class="form-group">
-									<label for="clave" class="control-label sr-only">Contraseña</label>
-									<input type="password" class="form-control" id="clave" name="clave" placeholder="Ingrese contraseña de usuario ...">
-								</div>
-                                                                <%if (userSession != null && !userSession.isEmpty() && userSession == "true") {%> 
-                                                                    <button type="submit" id="accion" name="accion" value="ingresar" class="btn btn-primary btn-lg btn-block"><a href="dashboard.jsp">Ingresar</a></button>
-								<%}%>
-                                                                <%if (userSession == null || !userSession.isEmpty() || userSession == "false") {%> 
-                                                                    <button type="submit" id="accion" name="accion" value="ingresar" class="btn btn-primary btn-lg btn-block"><a href="#">Ingresar</a></button>
-								<%}%>
-                                                                <div class="bottom">
-									<span><i class="fa fa-lock"></i> <a href="#">¿ Olvidó su contraseña ?</a></span>
-								</div>
-							</form>
+						<div class="content">                                                            
+<!--                                                        <div class="alert alert-danger alert-dismissible" role="alert">
+                                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                <i class="fa fa-times-circle"></i>
+                                                        </div>-->
+                                                    <h2>Organizational System</h2>
+                                                    <br>
+                                                    <form class="form-horizontal" method="post" action="./loginServlet">
+                                                            <div class="form-group">
+                                                                    <label for="correo" class="control-label sr-only">Correo electrónico</label>
+                                                                    <input type="email" class="form-control" name="correo" id="correo" placeholder="Ingrese correo de usuario">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                    <label for="clave" class="control-label sr-only">Contraseña</label>
+                                                                    <input type="password" class="form-control" id="clave" name="clave" placeholder="Ingrese contraseña de usuario ...">
+                                                            </div>
+                                                            <button type="submit" id="accion" name="action" value="ingresar" class="btn btn-primary btn-lg btn-block">Ingresar</button>
+                                                            <br>
+                                                            <div class="bottom form-group-lg">
+                                                                    <span><i class="fa fa-lock"></i> <a href="#">¿ Olvidó su contraseña ?</a></span>
+                                                            </div>
+                                                    </form>
 						</div>
 					</div>
 					<div class="right">

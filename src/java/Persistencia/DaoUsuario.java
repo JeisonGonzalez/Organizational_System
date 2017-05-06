@@ -9,10 +9,10 @@ import java.util.List;
 
 public class DaoUsuario {
     
-    public List<Usuario> getUserList(Connection conexion) {
+    public List<Usuario> getUserList(Connection conexion, int idUsuario, String nombre, String clave, String correo, int idPerfil, int inSession, String fechaNacimiento, String imagenPerfil) {
         List<Usuario> userList = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = (PreparedStatement) conexion.prepareStatement(SQLHelpers.getUserList());
+            PreparedStatement preparedStatement = (PreparedStatement) conexion.prepareStatement(SQLHelpers.getUserList(idUsuario,nombre,clave,correo,idPerfil,inSession,fechaNacimiento,imagenPerfil));
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Usuario user = new Usuario();
@@ -24,21 +24,9 @@ public class DaoUsuario {
                 userList.add(user);
             }
         } catch (Exception e) {
-            System.out.println("Error en DaoEmpresa / ListadoEmpresas : "+e);
+            System.out.println("Error en DaoUsuario / getUserList : "+e);
         }
         return userList;
-    }
-    
-        public Boolean getUserByLogin (Connection conexion, String correo, String clave) {
-        Boolean response = false;
-        try {
-            PreparedStatement preparedStatement = (PreparedStatement) conexion.prepareStatement(SQLHelpers.getUserByLogin(correo,clave));
-            ResultSet resultSet = preparedStatement.executeQuery();
-            
-        } catch (Exception e) {
-            System.out.println("Error en DaoEmpresa / ListadoEmpresas : "+e);
-        }
-        return response;
     }
         
     public List<Usuario> getUserById(Connection conexion, int idUsuario) {

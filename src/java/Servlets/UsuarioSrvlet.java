@@ -35,7 +35,7 @@ public class UsuarioSrvlet extends HttpServlet {
         }
         
         try {
-            request.setAttribute("listado", usuarioNegocio.getUserList());
+            request.setAttribute("listado", usuarioNegocio.getUserList(-1, null, null, null, -1, 1, null, null));
         } catch (NumberFormatException e) {
             System.out.println("Error seteando atributo en opción Listar usuario : " + e);
         }

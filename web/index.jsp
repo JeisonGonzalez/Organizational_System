@@ -6,8 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    String clave = request.getParameter("clave");
-    String correo = request.getParameter("correo");
+    String userSession = request.getParameter("userSession");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,14 +47,13 @@
 									<label for="clave" class="control-label sr-only">Contraseña</label>
 									<input type="password" class="form-control" id="clave" name="clave" placeholder="Ingrese contraseña de usuario ...">
 								</div>
-								<div class="form-group clearfix">
-									<label class="fancy-checkbox element-left">
-										<input type="checkbox">
-										<span>Recordarme</span>
-									</label>
-								</div>
-                                                            <button type="submit" id="accion" name="accion" value="ingresar" class="btn btn-primary btn-lg btn-block">Ingresar</button>
-								<div class="bottom">
+                                                                <%if (userSession != null && !userSession.isEmpty() && userSession == "true") {%> 
+                                                                    <button type="submit" id="accion" name="accion" value="ingresar" class="btn btn-primary btn-lg btn-block"><a href="dashboard.jsp">Ingresar</a></button>
+								<%}%>
+                                                                <%if (userSession == null || !userSession.isEmpty() || userSession == "false") {%> 
+                                                                    <button type="submit" id="accion" name="accion" value="ingresar" class="btn btn-primary btn-lg btn-block"><a href="#">Ingresar</a></button>
+								<%}%>
+                                                                <div class="bottom">
 									<span><i class="fa fa-lock"></i> <a href="#">¿ Olvidó su contraseña ?</a></span>
 								</div>
 							</form>

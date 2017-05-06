@@ -1,9 +1,9 @@
 package Servlets;
 
+import Entidades.Usuario;
 import Negocio.UsuarioNegocio;
-import Persistencia.DaoUsuario;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,16 +24,20 @@ public class loginServlet extends HttpServlet {
         String accion = request.getParameter("accion");
         
         UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-
+        Boolean userSession = false;
         //Realizar acciones
         if (accion.equalsIgnoreCase("Ingresar")) {
             try {
-                mensajes = usuarioNegocio.getUserByLogin(clave,correo) == true ? "Ingresando al sistema" : "Error : Ususario o contraseña incorrectos";
+                List<Usuario> getUserSession = usuarioNegocio.getUserList(-1, null, clave, correo, -1, -1, null, null);
+                if (getUserSession.size() > 0) {
+                    userSession = true;
+                }
             } catch (Exception e) {
                 mensajes += "<br/> Error : No se pudo guardar el registro";
                 System.out.println("Error obteniendo método get Guardar : " + e);
             }
         }
+        request.setAttribute("userSession", userSession);
         request.getRequestDispatcher("/Empleado.jsp").forward(request, response);
     }
 

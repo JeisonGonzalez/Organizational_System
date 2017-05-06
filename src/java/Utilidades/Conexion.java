@@ -28,7 +28,7 @@ public class Conexion {
         try {
             System.out.println("-------------------------- Creando conexión a DB : --------------------------");
             System.out.println();
-            ResultSet resulSet = Conexion.getCon().prepareStatement(SQLHelpers.getUserList()).executeQuery();
+            ResultSet resulSet = Conexion.getCon().prepareStatement(SQLHelpers.getUserList(-1, null, null, null, -1, -1, null, null)).executeQuery();
             if (resulSet.next()) {
                 System.out.println("CONEXIÓN ESTABLECIDA CORRECTAMENTE");
                 System.out.println("");

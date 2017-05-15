@@ -40,7 +40,7 @@
                                 <div id="subPagesOrganizacion" class="collapse ">
                                         <ul class="nav">
                                                 <li><a href="page-profile.html" class="">Áreas</a></li>
-                                                <li><a href="Empleado.jsp" class="">Empleados</a></li>
+                                                <li><a href="UsuarioSrvlet" class="">Empleados</a></li>
                                         </ul>
                                 </div>
                             </li>

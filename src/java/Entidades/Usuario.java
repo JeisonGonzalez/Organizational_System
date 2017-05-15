@@ -1,7 +1,5 @@
 package Entidades;
 
-import java.sql.Date;
-
 public class Usuario {
     
     int idUsuario;
@@ -27,30 +25,6 @@ public class Usuario {
         this.imagenPerfil = imagenPerfil;
     }
 
-    public String getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(String fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-    
-    public int getInSession() {
-        return inSession;
-    }
-
-    public void setInSession(int inSession) {
-        this.inSession = inSession;
-    }
-
-    public String getImagenPerfil() {
-        return imagenPerfil;
-    }
-
-    public void setImagenPerfil(String imagenPerfil) {
-        this.imagenPerfil = imagenPerfil;
-    }
-    
     public int getIdUsuario() {
         return idUsuario;
     }
@@ -90,5 +64,29 @@ public class Usuario {
     public void setIdPerfil(int idPerfil) {
         this.idPerfil = idPerfil;
     }
-    
+
+    public int getInSession() {
+        return inSession;
+    }
+
+    public void setInSession(int inSession) {
+        this.inSession = inSession;
+    }
+
+    public String getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public String getImagenPerfil() {
+        return imagenPerfil;
+    }
+
+    public void setImagenPerfil(String imagenPerfil) {
+        this.imagenPerfil = imagenPerfil;
+    }
+
 }

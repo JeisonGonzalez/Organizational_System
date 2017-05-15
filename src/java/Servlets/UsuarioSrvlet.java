@@ -3,6 +3,9 @@ package Servlets;
 import Negocio.UsuarioNegocio;
 import Persistencia.DaoUsuario;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,31 +18,45 @@ public class UsuarioSrvlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         DaoUsuario daoUsuario = new DaoUsuario();
         String mensajes = "";
-        int idUsuario = request.getParameter("idUsuario") != null ? Integer.parseInt(request.getParameter("idUsuario")) : 0;
-        String nombre = request.getParameter("nombre");
-        String clave = request.getParameter("clave");
-        String correo = request.getParameter("clave");
-        int idPerfil = request.getParameter("idPerfil") != null ? Integer.parseInt(request.getParameter("idPerfil")) : 0;
-        String accion = request.getParameter("action");
-        
+        String success = "true";
+        String nombreUsuario = request.getParameter("nombreUsuario");
+        String cargoUsuario = request.getParameter("cargoUsuario");
+        String fechaNacimiento = request.getParameter("fechaNacimiento");
+        String correoUsuario = request.getParameter("correoUsuario");
+        String clave = request.getParameter("claveUsuario");
+        String submit = request.getParameter("submit");
+        request.setAttribute("nombreOrganizacion", "Organizational system");
         UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-
-        //Realizar acciones
-        if (accion.equalsIgnoreCase("Guardar")) {
-            try {
-                mensajes = usuarioNegocio.insertUser(nombre,clave,correo,idPerfil);
-            } catch (Exception e) {
-                mensajes += "<br/> No se pudo guardar el registro";
-                System.out.println("Error obteniendo método get Guardar : " + e);
-            }
+        
+        if (submit != null && !submit.isEmpty()) {
+            Random rnd = new Random();
+            Map<String, String> datosUsuario = new HashMap<String, String>();
+            datosUsuario.put("nombreUsuario", nombreUsuario);
+            datosUsuario.put("cargoUsuario", cargoUsuario);
+            datosUsuario.put("cumpleañosUsuario", fechaNacimiento);
+            datosUsuario.put("correoUsuario", correoUsuario);
+            validarDatosObligatorios(datosUsuario);
+            mensajes = usuarioNegocio.insertUser(nombreUsuario, clave, correoUsuario, 1, fechaNacimiento, "");
         }
         
         try {
-            request.setAttribute("listado", usuarioNegocio.getUserList(-1, null, null, null, -1, 1, null, null));
+            request.setAttribute("listadoEmpleado", usuarioNegocio.getUserList(-1, null, null, null, -1, -1, null, null));
         } catch (NumberFormatException e) {
             System.out.println("Error seteando atributo en opción Listar usuario : " + e);
         }
+        request.setAttribute("success", success);
+        request.setAttribute("mensajes", mensajes);
         request.getRequestDispatcher("/Empleado.jsp").forward(request, response);
+    }
+    
+    public static String validarDatosObligatorios(Map<String, String> datos) {
+        String mensaje = null;
+        for (Map.Entry<String, String> entrySet : datos.entrySet()) {
+            if (entrySet == null || entrySet.toString().isEmpty()) {
+                mensaje = "Debe ingresar todos los campos obligatorios.";
+            }
+        }
+        return mensaje;
     }
 
     @Override

@@ -182,30 +182,31 @@ CREATE TABLE IF NOT EXISTS `OrganizationalSystemDB`.`Destinatario` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
--- Table `OrganizationalSystemDB`.`PerfilxArea`
+-- Table `OrganizationalSystemDB`.`mensaje`
 -- -----------------------------------------------------
--- CREATE TABLE IF NOT EXISTS `OrganizationalSystemDB`.`PerfilxArea` (
---   `idPerfil` INT NOT NULL,
---   `idArea` INT NOT NULL,
---   INDEX `fk_area_perfil_idx` (`idPerfil` ASC, `idArea` ASC),
---   INDEX `fk_perfil_area_idx` (`idArea` ASC),
---   CONSTRAINT `fk_perfil_area`
---     FOREIGN KEY (`idArea`)
---     REFERENCES `OrganizationalSystemDB`.`Perfil` (`idPerfil`)
---     ON DELETE NO ACTION
---     ON UPDATE NO ACTION,
---   CONSTRAINT `fk_area_perfil`
---     FOREIGN KEY (`idPerfil` , `idArea`)
---     REFERENCES `OrganizationalSystemDB`.`Area` (`idArea` , `idArea`)
---     ON DELETE NO ACTION
---     ON UPDATE NO ACTION)
--- ENGINE = InnoDB;
+CREATE TABLE IF NOT EXISTS `OrganizationalSystemDB`.`mensaje` (
+  `idMensaje` INT NOT NULL AUTO_INCREMENT,
+  `idUsuarioEmisor` INT NOT NULL,
+  `idUsuarioReceptor` VARCHAR(255) NOT NULL,
+  `asunto` VARCHAR(45) NOT NULL,
+  `mensaje` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idMensaje`),
+  UNIQUE INDEX `idMensaje_UNIQUE` (`idMensaje` ASC),
+  CONSTRAINT `fk_mensaje_usuario`
+    FOREIGN KEY (`idUsuarioEmisor`)
+    REFERENCES `OrganizationalSystemDB`.`Usuario` (`idUsuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-INSERT INTO `area`(`idArea`, `nombre`, `descripcion`, `padre`) VALUES (1,'Desarrollo','En esta área de la compañía se encuentran los desarrolladores de software pertenecientes a ésta',null);
-INSERT INTO `perfil`(`idPerfil`, `idArea`, `nombre`, `descripcion`, `padre`) VALUES (1,1,'Administrador','Este perfil dispone de un control total del software de la compañía',null);
-INSERT INTO `usuario`(`nombre`, `clave`, `correo`, `idPerfil`, `inSession`, `fechaNacimiento`, `imagenPerfil`) VALUES ('Jeison González Cifuentes', '123', 'jeison_gonzalez23161@elpoli.edu.co','1',0,'12/03/1999','/perfil.jgp');
+
+-- -----------------------------------------------------
+-- Se agrega Usuario administrador por defecto
+-- -----------------------------------------------------
+INSERT INTO `area`(`idArea`, `nombre`, `descripcion`, `padre`) VALUES (1,'Administración del sistema','En esta área se encuentran los administradores del software',null);
+INSERT INTO `perfil`(`idPerfil`, `idArea`, `nombre`, `descripcion`, `padre`) VALUES (1,1,'Administrador','Este perfil dispone de un control total del software',null);
+INSERT INTO `usuario`(`nombre`, `clave`, `correo`, `idPerfil`, `inSession`, `fechaNacimiento`, `imagenPerfil`) VALUES ('Super usuario', 'superUsuario123', 'super_usuario123@gmail.com',1,0,'12/03/1999','/perfil.jgp');

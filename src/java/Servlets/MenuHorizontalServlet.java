@@ -1,47 +1,41 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Servlets;
 
-import Entidades.Usuario;
-import Negocio.UsuarioNegocio;
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * * @author Jeison
+ *
+ * @author Jeison
  */
+public class MenuHorizontalServlet extends HttpServlet {
 
-public class loginServlet extends HttpServlet {
-
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String clave = request.getParameter("clave");
         String correo = request.getParameter("correo");
-        String submit = request.getParameter("submit");
+        String action = request.getParameter("action");
         
-        if (clave != null && !clave.isEmpty() && correo != null && !correo.isEmpty()) {
-            UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-            //Realizar acciones
-            if (submit.equalsIgnoreCase("Ingresar")) {
-                try {
-                    List<Usuario> getUserSession = usuarioNegocio.getUserList(-1, null, clave, correo, -1, -1, null, null);
-                    if (getUserSession != null && getUserSession.size() > 0) {
-                        request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
-                    } else {
-                        request.setAttribute("mensajes", "Usuario o contraseña incorrectos");
-                        request.getRequestDispatcher("/index.jsp").forward(request, response);
-                    }
-                } catch (Exception e) {
-                    System.out.println("Error obteniendo usuario para el ingreso al sistema : " + e);
-                }
-            }
-        } else {
-            request.setAttribute("mensajes", "Debes ingresar un usuario y una contraseña");
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
-        }
+        request.setAttribute("mensajes", "Debes ingresar un usuario y una contraseña");
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

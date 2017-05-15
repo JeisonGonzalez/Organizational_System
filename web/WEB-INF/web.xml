@@ -8,6 +8,10 @@
         <servlet-name>loginServlet</servlet-name>
         <servlet-class>Servlets.loginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MenuHorizontalServlet</servlet-name>
+        <servlet-class>Servlets.MenuHorizontalServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UsuarioSrvlet</servlet-name>
         <url-pattern>/UsuarioSrvlet</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/loginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MenuHorizontalServlet</servlet-name>
+        <url-pattern>/MenuHorizontalServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

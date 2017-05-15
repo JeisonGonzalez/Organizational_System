@@ -30,7 +30,7 @@ public class UsuarioNegocio {
         return daoUsuario.deleteUser(conexion, idUsuario);
     }
 
-    public String insertUser (String nombre, String clave, String correo, int idPerfil) {
+    public String insertUser (String nombre, String clave, String correo,int idPerfil, String fechaNacimiento, String imagenPerfil) {
         String mensajes = "";
         
         if (nombre == null || nombre.isEmpty()) {
@@ -52,7 +52,7 @@ public class UsuarioNegocio {
         if (mensajes.isEmpty()) {
             try {
                 conexion = (Connection) Conexion.getCon();
-                mensajes = daoUsuario.insertUser(conexion, nombre, clave, correo, idPerfil);
+                mensajes = daoUsuario.insertUser(conexion, nombre, clave, correo, idPerfil, fechaNacimiento, imagenPerfil);
             } catch (Exception e) {
                 System.out.println("Error insertando el usuario en insertUser de UsuarioNegocio.java : " + e);
             }

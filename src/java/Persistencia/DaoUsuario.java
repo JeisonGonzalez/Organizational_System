@@ -44,7 +44,7 @@ public class DaoUsuario {
         return mensajes;
     }
     
-    public String insertUser (Connection conexion, String nombre, String clave, String correo, int idPerfil) {
+    public String insertUser (Connection conexion, String nombre, String clave, String correo, int idPerfil, String fechaNacimiento, String imagenPerfil) {
         String mensajes = "";
         try {
             PreparedStatement preparedStatement = conexion.prepareStatement(SQLHelpers.insertUser());
@@ -52,6 +52,9 @@ public class DaoUsuario {
             preparedStatement.setString(2, clave);
             preparedStatement.setString(3, correo);
             preparedStatement.setInt(4, idPerfil);
+            preparedStatement.setInt(5, 0);
+            preparedStatement.setString(6, fechaNacimiento);
+            preparedStatement.setString(7, imagenPerfil);
             preparedStatement.execute();
             if (preparedStatement.getUpdateCount() > 0) {
                 mensajes = "<br/>Usuario '" + nombre + "' guardado exitosamente.";

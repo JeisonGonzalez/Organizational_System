@@ -47,7 +47,7 @@ public class SQLHelpers {
     }
 
     public static String insertUser() {
-        return "INSERT INTO usuario (nombre, clave, correo, idPerfil) VALUES (?,?,?,?)";
+        return "INSERT INTO usuario (nombre, clave, correo,idPerfil,inSession,fechaNacimiento,imagenPerfil) VALUES (?,?,?,?,?,?,?)";
     }
 
     public static String deleteUser(int idUsuario) {

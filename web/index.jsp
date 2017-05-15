@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    String message = request.getParameter("message");
+    String mensajes = (String)request.getAttribute("mensajes");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,48 +31,52 @@
 
 <body>
 	<!-- WRAPPER -->
-	<div id="wrapper">
-		<div class="vertical-align-wrap">
-			<div class="vertical-align-middle">
-				<div class="auth-box ">
-					<div class="left">
-						<div class="content">                                                            
-<!--                                                        <div class="alert alert-danger alert-dismissible" role="alert">
-                                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                                <i class="fa fa-times-circle"></i>
-                                                        </div>-->
-                                                    <h2>Organizational System</h2>
-                                                    <br>
-                                                    <form class="form-horizontal" method="post" action="./loginServlet">
-                                                            <div class="form-group">
-                                                                    <label for="correo" class="control-label sr-only">Correo electrónico</label>
-                                                                    <input type="email" class="form-control" name="correo" id="correo" placeholder="Ingrese correo de usuario">
+        <form class="form-horizontal" method="post" action="./loginServlet">
+            <div id="wrapper">
+                    <div class="vertical-align-wrap">
+                            <div class="vertical-align-middle">
+                                    <div class="auth-box ">
+                                            <div class="left">
+                                                    <div class="content">                                                       
+                                                        <%if (mensajes != null && !mensajes.isEmpty()) {%> 
+                                                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                    <i class="fa fa-times-circle"></i> <%=mensajes%>
                                                             </div>
-                                                            <div class="form-group">
-                                                                    <label for="clave" class="control-label sr-only">Contraseña</label>
-                                                                    <input type="password" class="form-control" id="clave" name="clave" placeholder="Ingrese contraseña de usuario ...">
-                                                            </div>
-                                                            <button type="submit" id="accion" name="action" value="ingresar" class="btn btn-primary btn-lg btn-block">Ingresar</button>
-                                                            <br>
-                                                            <div class="bottom form-group-lg">
-                                                                    <span><i class="fa fa-lock"></i> <a href="#">¿ Olvidó su contraseña ?</a></span>
-                                                            </div>
-                                                    </form>
-						</div>
-					</div>
-					<div class="right">
-						<div class="overlay"></div>
-						<div class="content text">
-							<h1 class="heading">Genera un alineamiento eficiente entre la estructura y los valores compartidos de una organización ...</h1>
-							<p>De forma que los rumbos estratégicos se vean fortalecidos.</p>
-						</div>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-			</div>
-		</div>
-	</div>
+                                                        <% } %>
+                                                        <h2>Organizational System</h2>
+                                                        <br>
+                                                                <div class="form-group">
+                                                                        <label for="correo" class="control-label sr-only">Correo electrónico</label>
+                                                                        <input type="email" class="form-control" name="correo" id="correo" placeholder="Ingrese correo de usuario">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                        <label for="clave" class="control-label sr-only">Contraseña</label>
+                                                                        <input type="password" class="form-control" id="clave" name="clave" placeholder="Ingrese contraseña de usuario ...">
+                                                                </div>
+                                                                <button type="submit" id="submit" name="submit" value="ingresar" class="btn btn-primary btn-lg btn-block">Ingresar</button>
+                                                                <br>
+                                                                <div class="bottom form-group-lg">
+                                                                        <span><i class="fa fa-lock"></i> <a href="#">¿ Olvidó su contraseña ?</a></span>
+                                                                </div>
+                                                    </div>
+                                            </div>
+                                            <div class="right">
+                                                    <div class="overlay"></div>
+                                                    <div class="content text">
+                                                            <h1 class="heading">Genera un alineamiento eficiente entre la estructura y los valores compartidos de una organización ...</h1>
+                                                            <p>De forma que los rumbos estratégicos se vean fortalecidos.</p>
+                                                    </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                    </div>
+                            </div>
+                    </div>
+            </div>
+        </form>
 	<!-- END WRAPPER -->
+	<script src="assets/js/jquery/jquery-2.1.0.min.js"></script>
+	<script src="assets/js/bootstrap/bootstrap.min.js"></script>
 </body>
 
 </html>

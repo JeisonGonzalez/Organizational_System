@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 
 
-<form class="form-horizontal" method="post" action="./loginServlet">
+<form class="form-horizontal" method="post" action="./MenuHorizontalServlet">
     <nav class="navbar navbar-default">
             <div class="container-fluid">
                     <div class="navbar-btn">
@@ -47,7 +47,7 @@
                                             <ul class="dropdown-menu">
                                                     <li><a href="perfil.jsp"><i class="lnr lnr-user"></i> <span>Mi perfil</span></a></li>
                                                     <li><a href="#"><i class="lnr lnr-cog"></i> <span>Configuración</span></a></li>
-                                                    <li><a href="index.jsp"><i class="lnr lnr-exit"></i> <span>Salir</span></a></li>
+                                                    <li><button type="submit" name="salir" value="salir" class="btn btn-warning col-xs-12 pull-left"><i class="lnr lnr-exit"></i> <span>Cerrar sesión</span></button></li>
                                             </ul>
                                     </li>
                             </ul>
@@ -55,3 +55,7 @@
             </div>
     </nav>
 </form>
+<script src="js/menuHorizontal.js"></script>
+<script>
+    init();
+</script>

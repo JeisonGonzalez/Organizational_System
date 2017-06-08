@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,11 +31,10 @@ public class MenuHorizontalServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String clave = request.getParameter("clave");
-        String correo = request.getParameter("correo");
-        String action = request.getParameter("action");
-        
-        request.setAttribute("mensajes", "Debes ingresar un usuario y una contraseña");
+        HttpSession session = request.getSession();
+        session.getAttribute("correoInSession");
+        session.setAttribute("correoInSession", null);
+        session.setAttribute("claveInSession", null);
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 

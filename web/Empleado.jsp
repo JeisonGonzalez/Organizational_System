@@ -175,7 +175,7 @@
                 <script src="assets/js/bootstrap/bootstrap.min.js"></script>
                 <script src="assets/js/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
                 <script src="assets/js/klorofil.min.js"></script>
-                <script src="Empleado.js"></script>
+                <script src="js/Empleado.js"></script>
     </body>
 
     </html>

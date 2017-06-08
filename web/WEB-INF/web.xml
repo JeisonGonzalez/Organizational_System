@@ -12,6 +12,10 @@
         <servlet-name>MenuHorizontalServlet</servlet-name>
         <servlet-class>Servlets.MenuHorizontalServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>login</servlet-name>
+        <servlet-class>Servlets.login</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UsuarioSrvlet</servlet-name>
         <url-pattern>/UsuarioSrvlet</url-pattern>

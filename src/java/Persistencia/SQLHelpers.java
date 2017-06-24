@@ -53,4 +53,42 @@ public class SQLHelpers {
     public static String deleteUser(int idUsuario) {
         return "DELETE FROM usuario WHERE idUsuario = '" + idUsuario + "'";
     }
+    
+    //-------------------------------------- AREA --------------------------------------
+    
+    static String setArea() {
+        return "INSERT INTO AREA (idArea,nombre,descripcion,padre) VALUES (?, ?, ?, ?)";
+    }
+
+    static String setEliminarArea() {
+        return "Delete from AREA where  idArea =?";
+    }
+    
+    static String getAreasList(int idArea, String nombre, String descripcion, int padre, String buscar) {
+        String select = "SELECT * FROM area WHERE 1 = 1";
+        if (idArea > 0) {            
+            select += " AND idArea = " + idArea;
+        }
+        if (nombre != null && !nombre.isEmpty()) {
+            select += " AND nombre" + nombre;
+        }
+        if (descripcion != null && !descripcion.isEmpty()) {
+            select += " AND descripcion = " + descripcion;            
+        }
+        if (padre > 0) {
+            select += " AND padre = " + padre;            
+        }
+        if (buscar != null && !buscar.isEmpty()) {
+            //buscar = "'" + buscar + "'";
+            buscar = buscar + "'";
+            buscar = "'" + buscar;
+            select += " AND ( idArea = " + buscar + " OR nombre = " + buscar + " OR descripcion = " + buscar +" OR padre = " + buscar +")";  
+        }
+        return select;
+    }
+
+    static String getListAP() {
+        return "select padre from area";
+    }
+    
 }

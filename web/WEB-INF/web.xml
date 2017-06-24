@@ -16,6 +16,10 @@
         <servlet-name>login</servlet-name>
         <servlet-class>Servlets.login</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AreasServlet</servlet-name>
+        <servlet-class>Servlets.AreasServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UsuarioSrvlet</servlet-name>
         <url-pattern>/UsuarioSrvlet</url-pattern>
@@ -27,6 +31,10 @@
     <servlet-mapping>
         <servlet-name>MenuHorizontalServlet</servlet-name>
         <url-pattern>/MenuHorizontalServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AreasServlet</servlet-name>
+        <url-pattern>/AreasServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

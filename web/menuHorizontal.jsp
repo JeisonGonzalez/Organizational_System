@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 
 <form class="form-horizontal" method="post" action="./MenuHorizontalServlet">
     <nav class="navbar navbar-default">

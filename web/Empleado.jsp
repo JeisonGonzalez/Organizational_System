@@ -9,15 +9,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
 //  Se obtienen datos provenientes del servlet y se guardan en variables para ser usadas en la JSP.
-    String nombreUsuario = request.getParameter("nombreUsuario");
-    String cargoUsuario = request.getParameter("cargoUsuario");
-    String fechaNacimiento = request.getParameter("fechaNacimiento");
-    String correoUsuario = request.getParameter("correoUsuario");
-    String mensajes = request.getParameter("mensajes");
-    String success = request.getParameter("success");
-    String claveUsuario = request.getParameter("claveUsuario");
-    String codigoUsuario = request.getParameter("codigoUsuario");
-    String nombreOrganizacion = request.getAttribute("nombreOrganizacion").toString();
+    String nombreUsuario = request.getAttribute("nombreUsuario") != null ? request.getAttribute("nombreUsuario").toString() : null;
+    String cargoUsuario = request.getAttribute("cargoUsuario") != null ? request.getAttribute("cargoUsuario").toString() : null;
+    String fechaNacimiento = request.getAttribute("fechaNacimiento") != null ? request.getAttribute("fechaNacimiento").toString() : null;
+    String correoUsuario = request.getAttribute("correoUsuario") != null ? request.getAttribute("correoUsuario").toString() : null;
+    String mensajes = request.getAttribute("mensajes") != null ? request.getAttribute("mensajes").toString() : null;
+    String claveUsuario = request.getAttribute("claveUsuario") != null ? request.getAttribute("claveUsuario").toString() : null;
+    String codigoUsuario = request.getAttribute("codigoUsuario") != null ? request.getAttribute("codigoUsuario").toString() : null;
+    String idUsuario = request.getAttribute("idUsuario") != null ? request.getAttribute("idUsuario").toString() : null;
+    String success = request.getAttribute("success") != null ? request.getAttribute("success").toString() : null;
     List<Usuario> listadoEmpleado = (List<Usuario>) request.getAttribute("listadoEmpleado");
 %>
     <!DOCTYPE html>
@@ -55,11 +55,21 @@
                             <form method="post" action="./UsuarioSrvlet">
                                 <div class="container-fluid">
                                     <div class="row">
-                                        <div class="col-xs-12">
+                                        <div class="col-xs-12">                                              
+                                            <%if (mensajes != null && !mensajes.isEmpty()) {%>
+                                                <%if (success != null && success.equals("true")) {%>     
+                                                    <div class="alert alert-success alert-dismissible" role="alert">
+                                                <% } else { %>
+                                                    <div class="alert alert-danger alert-dismissible" role="alert">
+                                                <% } %>
+                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                        <i class="fa fa-times-circle"></i> <%=mensajes%>
+                                                </div>
+                                            <% } %>
                                             <!-- Tabla de empleados -->
                                             <div class="panel">
                                                 <div class="panel-heading">
-                                                    <h3 class="panel-title">Empleados <%=nombreOrganizacion%></h3>
+                                                    <h3 class="panel-title">Empleados<h3>
                                                 </div>
                                                 <div class="panel-body">
                                                     <%if (listadoEmpleado != null && !listadoEmpleado.isEmpty()) {%> 
@@ -67,11 +77,10 @@
                                                             <table class="table table-hover">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>id</th>
+                                                                        <th>Código interno</th>
                                                                         <th>Nombre completo</th>
-                                                                        <th>Clave</th>
-                                                                        <th>Correo</th>
-                                                                        <th>Perfil</th>
+                                                                        <th>Correo electrónico</th>
+                                                                        <th>Perfil ocupacional</th>
                                                                         <th>Fecha de nacimiento</th>
                                                                     </tr>
                                                                 </thead>
@@ -80,7 +89,6 @@
                                                                         <tr onclick="cargarFormulario('<%=empleado.getIdUsuario()%>','<%=empleado.getNombre()%>','<%=empleado.getClave()%>','<%=empleado.getCorreo()%>','<%=empleado.getIdPerfil()%>','<%=empleado.getFechaNacimiento()%>');">
                                                                             <td><%=empleado.getIdUsuario()%></td>
                                                                             <td><%=empleado.getNombre()%></td>
-                                                                            <td><%=empleado.getClave()%></td>
                                                                             <td><%=empleado.getCorreo()%></td>
                                                                             <td><%=empleado.getIdPerfil()%></td>
                                                                             <td><%=empleado.getFechaNacimiento()%></td>
@@ -97,8 +105,8 @@
                                                     <%}%>
                                                     <br>
                                                     <div class="input-group">
-                                                        <input class="form-control" placeholder="Buscar empleado ..." type="text">
-                                                        <span class="input-group-btn"><button class="btn btn-primary" type="button">Buscar</button></span>
+                                                        <input class="form-control" id="search" name="search" placeholder="Buscar empleado por nombre, correo electrónico o perfil ocupacional..." type="text">
+                                                        <span class="input-group-btn"><button class="btn btn-primary" type="submit" name="submit" value="Buscar">Buscar</button></span>
                                                     </div>
                                                     <br>
                                                     <p class="demo-button">
@@ -117,9 +125,9 @@
                                                             <h4 class="modal-title">Formulario de empleado</h4>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <div class="input-group">
+                                                            <div id="input-group-idUsuario" class="input-group hide">
                                                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                                                <input class="form-control" id="claveUsuario" name="codigoUsuario" value="<%=codigoUsuario==null?"":codigoUsuario%>" placeholder="Código interno del empleado" type="number" disabled>
+                                                                <input class="form-control" id="idUsuario" name="idUsuario" value="<%=idUsuario==null?"":idUsuario%>" placeholder="Código interno del empleado" type="number">
                                                             </div>
                                                             <br>
                                                             <div class="input-group">
@@ -129,7 +137,7 @@
                                                             <br>
                                                             <div class="input-group">
                                                                 <span class="input-group-addon"><i class="fa fa-certificate"></i></span>
-                                                                <input class="form-control" id="claveUsuario" name="claveUsuario" value="<%=claveUsuario==null?"":claveUsuario%>" placeholder="Contraseña para el ingreso del empleado al sistema" type="password">
+                                                                <input class="form-control" maxlength="8" id="claveUsuario" name="claveUsuario" value="<%=claveUsuario==null?"":claveUsuario%>" placeholder="Contraseña para el ingreso del empleado al sistema" type="password">
                                                             </div>
                                                             <br>
                                                             <div class="input-group">
@@ -139,7 +147,10 @@
                                                             <br>
                                                             <div class="input-group">
                                                                 <span class="input-group-addon"><i class="fa fa-male"></i></span>
-                                                                <input class="form-control" id="cargoUsuario" name="cargoUsuario" value="<%=cargoUsuario==null?"":cargoUsuario%>" placeholder="Cargo que desempeña el empleado" type="text">
+                                                                <select class="form-control" id="cargoUsuario" name="cargoUsuario">
+                                                                    <option value="0">Cargo que desempeña el empleado</option>
+                                                                    <option value="1">Administrador</option>
+                                                                </select>
                                                             </div>
                                                             <br>
                                                             <div class="input-group">
@@ -151,7 +162,7 @@
                                                         <div class="modal-footer">
                                                             <p class="demo-button">
                                                                 <button type="submit" name="submit" value="Guardar" class="btn btn-success"><i class="fa fa-check-circle"></i> Guardar</button>
-                                                                <button type="button" name="submit" value="Eliminar" class="btn btn-danger"><i class="fa fa-trash-o"></i> Eliminar</button>
+                                                                <button type="submit" name="submit" value="Eliminar" class="btn btn-danger"><i class="fa fa-trash-o"></i> Eliminar</button>
                                                                 <button type="button" class="btn btn-warning" data-dismiss="modal"><i class="fa fa-remove"></i> Cancelar</button>
                                                             </p>
                                                         </div>

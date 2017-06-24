@@ -31,14 +31,38 @@ public class DaoUsuario {
         }
         return userList;
     }
-        
+      
+    public List<Usuario> getUserListBySearch(Connection conexion, String param) {
+        List<Usuario> userList = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = (PreparedStatement) conexion.prepareStatement(SQLHelpers.getUserListBySearch(param));
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Usuario user = new Usuario();
+                user.setIdUsuario(resultSet.getInt(1));
+                user.setNombre(resultSet.getString(2));
+                user.setClave(resultSet.getString(3));
+                user.setCorreo(resultSet.getString(4));
+                user.setIdPerfil(resultSet.getInt(5));
+                user.setInSession(resultSet.getInt(6));
+                user.setFechaNacimiento(resultSet.getString(7));
+                user.setImagenPerfil(resultSet.getString(8));
+                userList.add(user);
+            }
+        } catch (Exception e) {
+            System.out.println("Error en DaoUsuario / getUserListBySearch : "+e);
+        }
+        return userList;
+    }
+            
     public String deleteUser(Connection conexion, int idUsuario) {
         String mensajes = "";
         try {
             PreparedStatement preparedStatement = conexion.prepareStatement(SQLHelpers.deleteUser(idUsuario));
             preparedStatement.execute();
-            mensajes = "Usuario borrado exitosamente";
+            mensajes = "Empleado " + idUsuario + " borrado exitosamente";
         } catch (Exception e) {
+            mensajes = "El empleado no pudo ser borrado";
             System.out.println("Error intentando borrar usuario en DaoUsuario : " + e);
         }
         return mensajes;
@@ -57,9 +81,9 @@ public class DaoUsuario {
             preparedStatement.setString(7, imagenPerfil);
             preparedStatement.execute();
             if (preparedStatement.getUpdateCount() > 0) {
-                mensajes = "<br/>Usuario '" + nombre + "' guardado exitosamente.";
+                mensajes = "Usuario '" + nombre + "' guardado exitosamente.";
             } else {
-                mensajes = "<br/>El usuario no pudo ser guardado.";
+                mensajes = "El usuario no pudo ser guardado.";
             }
         } catch (Exception e) {
             mensajes += e.getMessage();
@@ -67,19 +91,15 @@ public class DaoUsuario {
         return mensajes;
     }
 
-    public String updateUser (Connection conexion, int idUsuario, String nombre, String clave, String correo, int idPerfil) {
+    public String updateUser (Connection conexion, Integer idUsuario, String nombre, String clave, String correo, Integer idPerfil, String fechaNacimiento, String imagenPerfil) {
         String mensajes = "";
         try {
-            PreparedStatement preparedStatement = conexion.prepareStatement(SQLHelpers.updateUser(idUsuario));
-            preparedStatement.setString(1, nombre);
-            preparedStatement.setString(2, clave);
-            preparedStatement.setString(3, correo);
-            preparedStatement.setInt(4, idPerfil);
+            PreparedStatement preparedStatement = conexion.prepareStatement(SQLHelpers.updateUser(idUsuario, nombre, clave, correo, idPerfil, fechaNacimiento, imagenPerfil));
             preparedStatement.execute();
             if (preparedStatement.getUpdateCount() > 0) {
-                mensajes = "<br/>Usuario '" + nombre + "' modificado exitosamente.";
+                mensajes = "Usuario '" + nombre + "' ha sido modificado exitosamente.";
             } else {
-                mensajes = "<br/>El usuario no pudo ser modificado.";
+                mensajes = "El usuario no pudo ser modificado.";
             }
         } catch (Exception e) {
             mensajes += e.getMessage();

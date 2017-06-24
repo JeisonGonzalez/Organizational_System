@@ -39,7 +39,7 @@
                                 <a href="#subPagesOrganizacion" data-toggle="collapse" class="collapsed"><i class="fa fa-users"></i> <span>Organización</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                                 <div id="subPagesOrganizacion" class="collapse ">
                                         <ul class="nav">
-                                                <li><a href="page-profile.html" class="">Áreas</a></li>
+                                                <li><a href="AreasServlet" class="">Áreas</a></li>
                                                 <li><a href="UsuarioSrvlet" class="">Empleados</a></li>
                                         </ul>
                                 </div>

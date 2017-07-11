@@ -57,7 +57,7 @@
                                 <a href="#subPagesControl" data-toggle="collapse" class="collapsed"><i class="fa fa-area-chart"></i> <span>Control</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                                 <div id="subPagesControl" class="collapse ">
                                         <ul class="nav">
-                                                <li><a href="page-profile.html" class="">Certificaciones</a></li>
+                                                <li><a href="CertificadoServlet" class="">Certificaciones</a></li>
                                         </ul>
                                 </div>
                             </li>

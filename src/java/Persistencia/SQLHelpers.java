@@ -153,5 +153,32 @@ public class SQLHelpers {
     static String getListAP() {
         return "select padre from area";
     }
+    //-------------------------------------- Certificado --------------------------------------
+    
+    public static String getCertificado() {
+        return "SELECT  idCertificacion,nombre,descripcion,avance,estado"
+                + " FROM certificacion";
+    }
+    
+    public static String getCertificado(String id) {
+        return "SELECT  idCertificacion,nombre,descripcion,avance,estado"
+                + " FROM certificacion where idCertificacion ='" + id + "' ";
+    }
+    
+    public static String getCertificadoget(String id) {
+        return "SELECT *"
+                + " FROM certificacion where idCertificacion ='" + id + "' ";
+    }
+    
+    public static String insertarCertificado() {
+        return "INSERT INTO certificacion(idCertificacion,nombre,descripcion,avance,estado)"
+                + "values(?,?,?,?,?)";
+    }
+    
+    public static String eliminarCertificado() {
+        return "DELETE FROM certificacion"
+                + " WHERE idCertificacion=?";
+    }
+    
     
 }

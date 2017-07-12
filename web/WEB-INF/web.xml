@@ -20,6 +20,10 @@
         <servlet-name>AreasServlet</servlet-name>
         <servlet-class>Servlets.AreasServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MotivacionServlet</servlet-name>
+        <servlet-class>Servlets.MotivacionServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UsuarioSrvlet</servlet-name>
         <url-pattern>/UsuarioSrvlet</url-pattern>
@@ -35,6 +39,10 @@
     <servlet-mapping>
         <servlet-name>AreasServlet</servlet-name>
         <url-pattern>/AreasServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MotivacionServlet</servlet-name>
+        <url-pattern>/MotivacionServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

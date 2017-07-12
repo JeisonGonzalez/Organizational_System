@@ -48,7 +48,7 @@
                                 <a href="#subPagesDireccion" data-toggle="collapse" class="collapsed"><i class="fa fa-handshake-o"></i> <span>Dirección</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                                 <div id="subPagesDireccion" class="collapse ">
                                         <ul class="nav">
-                                                <li><a href="page-login.html" class="">Motivación</a></li>
+                                                <li><a href="MotivacionServlet" class="">Motivación</a></li>
                                                 <li><a href="page-lockscreen.html" class="">Informativo</a></li>
                                         </ul>
                                 </div>

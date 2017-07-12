@@ -153,5 +153,79 @@ public class SQLHelpers {
     static String getListAP() {
         return "select padre from area";
     }
-    
+
+    static String getMensajesListBySearch(String param) {
+        String select = "SELECT * FROM mensaje WHERE";
+        if (param != null && !param.isEmpty()) {
+            select += " asunto like '%" + param + "%'";
+            select += " OR idMensaje like '%" + param + "%'";
+            select += " OR idUsuarioReceptor like '%" + param + "%'";
+            select += " OR mensaje like '%" + param + "%'";
+        }
+        return select;
+    }
+
+    static String getMotivacionList(int idMensaje, int idUsuarioEmisor, String idUsuarioReceptor, String asunto, String mensaje) {
+        String select = "SELECT * FROM mensaje WHERE 1 = 1";
+        if (idMensaje > 0) {
+            select += " AND idMensaje = " + idMensaje;
+        }
+        if (idUsuarioEmisor > 0) {
+            select += " AND idUsuarioEmisor = " + idUsuarioEmisor;
+        }
+        if (idUsuarioReceptor != null && !idUsuarioReceptor.isEmpty()) {
+            select += " AND idUsuarioReceptor = '" + idUsuarioReceptor + "'";
+        }
+        if (asunto != null && !asunto.isEmpty()) {
+            select += " AND asunto = '" + asunto + "'";
+        }
+        if (mensaje != null && !mensaje.isEmpty()) {
+            select += " AND mensaje = '" + mensaje + "'";
+        }
+        return select;
+    }
+
+    static String insertMotivacion() {
+        return "INSERT INTO mensaje (idUsuarioEmisor, idUsuarioReceptor, asunto, mensaje) VALUES (?,?,?,?)";
+    }
+
+    static String deleteMotivacion(Integer idMensaje) {
+        return "DELETE FROM mensaje WHERE idMensaje = '" + idMensaje + "'";
+    }
+
+    static String updateMotivacion(Integer idMensaje, String idReceptor, String Asunto, String mensajeEnviado) {
+        String query = "UPDATE mensaje SET";
+                
+        Integer countUpdates = 0;
+            if (idReceptor != null && !idReceptor.isEmpty()) {
+                query += " idUsuarioReceptor = '" + idReceptor + "'";
+                countUpdates ++;
+            }
+            if (Asunto != null && !Asunto.isEmpty()) {
+                if (countUpdates > 0) {
+                    query += " , asunto = '" + Asunto + "'";
+                } else {
+                    query += " asunto = '" + Asunto + "'";
+                }
+                countUpdates++;
+            }
+            if (mensajeEnviado != null && !mensajeEnviado.isEmpty()) {
+                if (countUpdates > 0) {
+                    query += " , mensaje = '" + mensajeEnviado + "'";
+                } else {
+                    query += " mensaje = '" + mensajeEnviado + "'";
+                }
+                countUpdates++;
+            }
+            if (countUpdates > 0 && idMensaje != null && idMensaje > 0) {
+                query += " WHERE idMensaje = " + idMensaje;
+            } else {
+                query = "";
+            }
+        return query;
+    }
+
+    static String getIdEmisor(String correo) {
+        return "SELECT idUsuario FROM usuario WHERE correo = '" + correo + "'";
+    }
 }

@@ -24,29 +24,50 @@ public class UsuarioNegocio {
             return null;
         }
     }
+            
+    public List<Usuario> getUserListBySearch (String param) {
+        try {
+            conexion = (Connection) Conexion.getCon();
+            return (List<Usuario>) daoUsuario.getUserListBySearch(conexion, param);
+        } catch (Exception e) {
+            System.out.println("Excepción al buscar lista de usuarios en UsuarioNegocio.java > getUserListBySearch : " + e);
+            return null;
+        }
+    }
         
     public String deleteUser (int idUsuario) throws SQLException {
         conexion = (Connection) Conexion.getCon();
         return daoUsuario.deleteUser(conexion, idUsuario);
     }
 
-    public String insertUser (String nombre, String clave, String correo,int idPerfil, String fechaNacimiento, String imagenPerfil) {
+    /**
+     * @param nombre
+     * @param clave
+     * @param correo
+     * @param idPerfil
+     * @param fechaNacimiento
+     * @param imagenPerfil
+     * @return
+     */
+    public String insertUser (String nombre, String clave, String correo,Integer idPerfil, String fechaNacimiento, String imagenPerfil) {
         String mensajes = "";
         
         if (nombre == null || nombre.isEmpty()) {
-            mensajes += "<br/> Debe ingresar un nombre para el usuario";
+            mensajes += "<br> Debe ingresar un nombre para el usuario";
         }
 
         if (clave == null || clave.isEmpty()) {
-            mensajes += "<br/> Debe ingresar una clave para el usuario";
+            mensajes += "<br> Debe ingresar una clave para el usuario";
+        } else if (clave.length() > 8){
+            mensajes += "<br> Clave demasiado larga";
         }
 
         if (correo == null || correo.isEmpty()) {
-            mensajes += "<br/> Debe ingresar un correo para contactar al usuario";
+            mensajes += "<br> Debe ingresar un correo para contactar al usuario";
         }
         
-        if (idPerfil <= 0) {
-            mensajes += "<br/> Debe ingresar un perfil el usuario";            
+        if (idPerfil == null || idPerfil <= 0) {
+            mensajes += "<br> Debe ingresar un perfil el usuario";            
         }
         
         if (mensajes.isEmpty()) {
@@ -61,29 +82,43 @@ public class UsuarioNegocio {
     }
 
 
-    public String updateUser (int idUsuario, String nombre, String clave, String correo, int idPerfil) {
+    /**
+     * @param idUsuario
+     * @param nombre
+     * @param clave
+     * @param correo
+     * @param idPerfil
+     * @param fechaNacimiento
+     * @param imagenPerfil
+     * @return
+     */
+    public String updateUser (Integer idUsuario, String nombre, String clave, String correo,Integer idPerfil, String fechaNacimiento, String imagenPerfil) {
         String mensajes = "";
         
+        if (idUsuario == null || idUsuario <= 0) {
+            mensajes += "<br> Debe ingresar la identificación del usuario";
+        }
+        
         if (nombre == null || nombre.isEmpty()) {
-            mensajes += "<br/> Debe ingresar un nombre para el usuario";
+            mensajes += "<br> Debe ingresar un nombre para el usuario";
         }
 
         if (clave == null || clave.isEmpty()) {
-            mensajes += "<br/> Debe ingresar una clave para el usuario";
+            mensajes += "<br> Debe ingresar una clave para el usuario";
         }
 
         if (correo == null || correo.isEmpty()) {
-            mensajes += "<br/> Debe ingresar un correo para contactar al usuario";
+            mensajes += "<br> Debe ingresar un correo para contactar al usuario";
         }
         
-        if (idPerfil <= 0) {
-            mensajes += "<br/> Debe ingresar un perfil el usuario";            
+        if (idPerfil == null || idPerfil <= 0) {
+            mensajes += "<br> Debe ingresar un perfil el usuario";            
         }
         
         if (mensajes.isEmpty()) {
             try {
                 conexion = (Connection) Conexion.getCon();
-                mensajes = daoUsuario.updateUser(conexion, idUsuario, nombre, clave, correo, idPerfil);
+                mensajes = daoUsuario.updateUser(conexion, idUsuario, nombre, clave, correo, idPerfil, fechaNacimiento, imagenPerfil);
             } catch (Exception e) {
                 System.out.println("Error modificando el usuario en updateUser de UsuarioNegocio.java : " + e);
             }

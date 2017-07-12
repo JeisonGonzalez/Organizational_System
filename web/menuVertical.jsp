@@ -39,7 +39,7 @@
                                 <a href="#subPagesOrganizacion" data-toggle="collapse" class="collapsed"><i class="fa fa-users"></i> <span>Organización</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                                 <div id="subPagesOrganizacion" class="collapse ">
                                         <ul class="nav">
-                                                <li><a href="page-profile.html" class="">Áreas</a></li>
+                                                <li><a href="AreasServlet" class="">Áreas</a></li>
                                                 <li><a href="UsuarioSrvlet" class="">Empleados</a></li>
                                         </ul>
                                 </div>
@@ -48,7 +48,7 @@
                                 <a href="#subPagesDireccion" data-toggle="collapse" class="collapsed"><i class="fa fa-handshake-o"></i> <span>Dirección</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                                 <div id="subPagesDireccion" class="collapse ">
                                         <ul class="nav">
-                                                <li><a href="page-login.html" class="">Motivación</a></li>
+                                                <li><a href="MotivacionServlet" class="">Motivación</a></li>
                                                 <li><a href="page-lockscreen.html" class="">Informativo</a></li>
                                         </ul>
                                 </div>
@@ -57,7 +57,8 @@
                                 <a href="#subPagesControl" data-toggle="collapse" class="collapsed"><i class="fa fa-area-chart"></i> <span>Control</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                                 <div id="subPagesControl" class="collapse ">
                                         <ul class="nav">
-                                                <li><a href="page-profile.html" class="">Certificaciones</a></li>
+                                                <li><a href="CertificadoServlet" class="">Certificaciones</a></li>
+                                                <li><a href="CapacitacionesServlet" class="">Capacitaciones</a></li>
                                         </ul>
                                 </div>
                             </li>

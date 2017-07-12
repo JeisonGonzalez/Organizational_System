@@ -5,6 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+//  Se obtienen datos provenientes del servlet y se guardan en variables para ser usadas en la JSP.
+    String userSessionName = request.getAttribute("userSessionName") != null ? request.getAttribute("userSessionName").toString() : "";
+%>
 <!DOCTYPE html>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
@@ -48,7 +52,7 @@
                                             <ul class="dropdown-menu">
                                                     <li><a href="perfil.jsp"><i class="lnr lnr-user"></i> <span>Mi perfil</span></a></li>
                                                     <li><a href="#"><i class="lnr lnr-cog"></i> <span>Configuración</span></a></li>
-                                                    <li><button type="submit" name="salir" value="salir" class="btn btn-warning col-xs-12 pull-left"><i class="lnr lnr-exit"></i> <span>Cerrar sesión</span></button></li>
+                                                    <li><button type="submit" name="submit" value="cerrarSesion" class="btn btn-warning col-xs-12 pull-left"><i class="lnr lnr-exit"></i> <span>Cerrar sesión</span></button></li>
                                             </ul>
                                     </li>
                             </ul>

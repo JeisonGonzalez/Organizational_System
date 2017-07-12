@@ -24,6 +24,14 @@
         <servlet-name>CertificadoServlet</servlet-name>
         <servlet-class>Servlets.CertificadoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CapacitacionesServlet</servlet-name>
+        <servlet-class>Servlets.CapacitacionesServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MotivacionServlet</servlet-name>
+        <servlet-class>Servlets.MotivacionServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UsuarioSrvlet</servlet-name>
         <url-pattern>/UsuarioSrvlet</url-pattern>
@@ -43,6 +51,14 @@
     <servlet-mapping>
         <servlet-name>CertificadoServlet</servlet-name>
         <url-pattern>/CertificadoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CapacitacionesServlet</servlet-name>
+        <url-pattern>/CapacitacionesServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MotivacionServlet</servlet-name>
+        <url-pattern>/MotivacionServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

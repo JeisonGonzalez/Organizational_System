@@ -45,7 +45,6 @@ public class SQLHelpers {
         if (param != null && !param.isEmpty()) {
             select += " nombre like '%" + param + "%'";
             select += " OR correo like '%" + param + "%'";
-            select += " OR idPerfil like '%" + param + "%'";
         }
         return select;
     }
@@ -117,41 +116,77 @@ public class SQLHelpers {
         return "DELETE FROM usuario WHERE idUsuario = '" + idUsuario + "'";
     }
     
-    //-------------------------------------- AREA --------------------------------------
+    //-------------------------------------- ÁREA --------------------------------------
     
-    static String setArea() {
-        return "INSERT INTO AREA (idArea,nombre,descripcion,padre) VALUES (?, ?, ?, ?)";
+    static String guardarArea() {
+        return "INSERT INTO area (nombre,descripcion,padre,nombre_padre) VALUES (?, ?, ?, ?)";
     }
 
-    static String setEliminarArea() {
-        return "Delete from AREA where  idArea =?";
+    static String actualizarArea() {
+        return "UPDATE area SET nombre = ?,descripcion = ?,padre = ?,nombre_padre = ? WHERE idArea = ?";
     }
     
-    static String getAreasList(int idArea, String nombre, String descripcion, int padre, String buscar) {
+    static String eliminarArea(String idArea) {
+        return "DELETE FROM area WHERE idArea = " + idArea;
+    }
+    
+    static String obtenerListadoDeAreas(int idArea, String nombre, String descripcion, int padre, String buscar) {
         String select = "SELECT * FROM area WHERE 1 = 1";
         if (idArea > 0) {            
             select += " AND idArea = " + idArea;
         }
         if (nombre != null && !nombre.isEmpty()) {
-            select += " AND nombre" + nombre;
+            select += " AND nombre = '" + nombre + "'";
         }
         if (descripcion != null && !descripcion.isEmpty()) {
-            select += " AND descripcion = " + descripcion;            
+            select += " AND descripcion = '" + descripcion + "'";            
         }
         if (padre > 0) {
             select += " AND padre = " + padre;            
         }
         if (buscar != null && !buscar.isEmpty()) {
-            //buscar = "'" + buscar + "'";
-            buscar = buscar + "'";
-            buscar = "'" + buscar;
-            select += " AND ( idArea = " + buscar + " OR nombre = " + buscar + " OR descripcion = " + buscar +" OR padre = " + buscar +")";  
+            select += " AND ( idArea = " + buscar + " OR nombre = '" + buscar + "' OR descripcion = '" + buscar +"' OR nombre_padre = '" + buscar +"')";  
         }
         return select;
     }
-
-    static String getListAP() {
-        return "select padre from area";
+    
+    
+    //-------------------------------------- Perfil --------------------------------------
+    
+    
+    static String guardarPerfil() {
+        return "INSERT INTO perfil (idArea,nombre,descripcion,padre,nombre_padre,nombre_area) VALUES (?, ?, ?, ?, ?, ?)";
+    }
+    
+    static String obtenerListadoDePerfiles(int idPerfil, String nombre, String descripcion, int idArea, int idPadre, String buscar) {
+        String select = "SELECT * FROM perfil WHERE 1 = 1";
+        if (idPerfil > 0 || idPerfil == -2) {            
+            select += " AND idPerfil = " + idPerfil;
+        }
+        if (nombre != null && !nombre.isEmpty()) {
+            select += " AND nombre = '" + nombre + "'";
+        }
+        if (descripcion != null && !descripcion.isEmpty()) {
+            select += " AND descripcion = '" + descripcion + "'";            
+        }
+        if (idArea > 0) {
+            select += " AND idArea = " + idArea;            
+        }
+        if (idPadre > 0) {
+            select += " AND padre = " + idPadre;            
+        }
+        if (buscar != null && !buscar.isEmpty()) {
+            select += " AND ( idPerfil = " + buscar + " OR nombre = '" + buscar + "' OR descripcion = '" + buscar +"')";  
+        }
+        return select;
+    }
+ 
+    static String eliminarPerfil(Integer idPerfil) {
+        return "DELETE FROM perfil WHERE idPerfil = " + idPerfil;
+    }
+    
+    static String actualizarPerfil() {
+        return "UPDATE perfil SET idArea = ?, nombre = ?,descripcion = ?,padre = ?,nombre_padre = ?, nombre_area = ? WHERE idPerfil = ?";
     }
     //-------------------------------------- Certificado --------------------------------------
     
@@ -161,13 +196,15 @@ public class SQLHelpers {
     }
     
     public static String getCertificado(String id) {
+        int busc = Integer.parseInt(id);
         return "SELECT  idCertificacion,nombre,descripcion,avance,estado"
-                + " FROM certificacion where idCertificacion ='" + id + "' ";
+                + " FROM certificacion where idCertificacion ='" + busc + "' ";
     }
     
     public static String getCertificadoget(String id) {
+        int busc = Integer.parseInt(id);
         return "SELECT *"
-                + " FROM certificacion where idCertificacion ='" + id + "' ";
+                + " FROM certificacion where idCertificacion ='" + busc + "' ";
     }
     
     public static String insertarCertificado() {
@@ -181,4 +218,104 @@ public class SQLHelpers {
     }
     
     
+    //-------------------------Capacitaciones----------------------
+    public static String getCapacitacion() {
+        return "SELECT  idCapacitacion,idArea,nombre,descripcion,estado,fecha"
+                + " FROM capacitacion";
+    }
+    
+    public static String getCapacitacion(String id) {
+        int busc = Integer.parseInt(id);
+        return "SELECT  idCapacitacion,idArea,nombre,descripcion,estado,fecha FROM capacitacion where idCapacitacion ='" + busc + "' ";
+    }
+    
+    public static String getCapacitacionget(String id) {
+        int busc = Integer.parseInt(id);
+        return "SELECT idCapacitacion,idArea,nombre,descripcion,estado,fecha FROM capacitacion where idCapacitacion ='" + busc + "' ";
+    }
+    
+    public static String insertarCapacitacion() {
+        return "INSERT INTO capacitacion(idCapacitacion,idArea,nombre,descripcion,estado,fecha)"
+                + "values(?,?,?,?,?,?)";
+    }
+    
+    public static String eliminarCapacitacion() {
+        return "DELETE FROM capacitacion"
+                + " WHERE idCapacitacion=?";
+    }
+        
+    static String getMensajesListBySearch(String param) {
+        String select = "SELECT * FROM mensaje WHERE";
+        if (param != null && !param.isEmpty()) {
+            select += " asunto like '%" + param + "%'";
+            select += " OR idMensaje like '%" + param + "%'";
+            select += " OR idUsuarioReceptor like '%" + param + "%'";
+            select += " OR mensaje like '%" + param + "%'";
+        }
+        return select;
+    }
+
+    static String getMotivacionList(int idMensaje, int idUsuarioEmisor, String idUsuarioReceptor, String asunto, String mensaje) {
+        String select = "SELECT * FROM mensaje WHERE 1 = 1";
+        if (idMensaje > 0) {
+            select += " AND idMensaje = " + idMensaje;
+        }
+        if (idUsuarioEmisor > 0) {
+            select += " AND idUsuarioEmisor = " + idUsuarioEmisor;
+        }
+        if (idUsuarioReceptor != null && !idUsuarioReceptor.isEmpty()) {
+            select += " AND idUsuarioReceptor = '" + idUsuarioReceptor + "'";
+        }
+        if (asunto != null && !asunto.isEmpty()) {
+            select += " AND asunto = '" + asunto + "'";
+        }
+        if (mensaje != null && !mensaje.isEmpty()) {
+            select += " AND mensaje = '" + mensaje + "'";
+        }
+        return select;
+    }
+
+    static String insertMotivacion() {
+        return "INSERT INTO mensaje (idUsuarioEmisor, idUsuarioReceptor, asunto, mensaje) VALUES (?,?,?,?)";
+    }
+
+    static String deleteMotivacion(Integer idMensaje) {
+        return "DELETE FROM mensaje WHERE idMensaje = '" + idMensaje + "'";
+    }
+
+    static String updateMotivacion(Integer idMensaje, String idReceptor, String Asunto, String mensajeEnviado) {
+        String query = "UPDATE mensaje SET";
+                
+        Integer countUpdates = 0;
+            if (idReceptor != null && !idReceptor.isEmpty()) {
+                query += " idUsuarioReceptor = '" + idReceptor + "'";
+                countUpdates ++;
+            }
+            if (Asunto != null && !Asunto.isEmpty()) {
+                if (countUpdates > 0) {
+                    query += " , asunto = '" + Asunto + "'";
+                } else {
+                    query += " asunto = '" + Asunto + "'";
+                }
+                countUpdates++;
+            }
+            if (mensajeEnviado != null && !mensajeEnviado.isEmpty()) {
+                if (countUpdates > 0) {
+                    query += " , mensaje = '" + mensajeEnviado + "'";
+                } else {
+                    query += " mensaje = '" + mensajeEnviado + "'";
+                }
+                countUpdates++;
+            }
+            if (countUpdates > 0 && idMensaje != null && idMensaje > 0) {
+                query += " WHERE idMensaje = " + idMensaje;
+            } else {
+                query = "";
+            }
+        return query;
+    }
+
+    static String getIdEmisor(String correo) {
+        return "SELECT idUsuario FROM usuario WHERE correo = '" + correo + "'";
+    }
 }

@@ -11,7 +11,7 @@
 
 <html>
     <head>
-        <title>Empleados | Organizational System</title>
+        <title>Certificados | Organizational System</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -132,7 +132,11 @@
                                                             <br>
                                                             <div class="input-group">
                                                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                                                <input class="form-control" placeholder="Estado" type="text" id="Estado" name="txtestado" />
+                                                                <select class="form-control" placeholder="Estado" id="Estado" name="txtestado">
+                                                                    <option placeholder="Estado">Seleccione un estado</option>
+                                                                    <option>Activo</option>
+                                                                    <option>Inactivo</option>
+                                                                </select>
                                                             </div>
                                                             <br>
                                                             <div class="input-group">

@@ -9,8 +9,9 @@
 
 
 <div class="sidebar">
-        <div class="brand">
-            <h3>Organizational System</h3>
+        <div class="brand text-center">
+            <img style="width: 50%;" src="http://www.humanitas.com.ve/img/organizacion_icono-03.png"><br>
+            Organizational System
         </div>
         <div class="sidebar-scroll">
                 <nav>
@@ -40,6 +41,7 @@
                                 <div id="subPagesOrganizacion" class="collapse ">
                                         <ul class="nav">
                                                 <li><a href="AreasServlet" class="">Áreas</a></li>
+                                                <li><a href="PerfilesServlet" class="">Perfiles</a></li>
                                                 <li><a href="UsuarioSrvlet" class="">Empleados</a></li>
                                         </ul>
                                 </div>
@@ -57,7 +59,8 @@
                                 <a href="#subPagesControl" data-toggle="collapse" class="collapsed"><i class="fa fa-area-chart"></i> <span>Control</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                                 <div id="subPagesControl" class="collapse ">
                                         <ul class="nav">
-                                                <li><a href="page-profile.html" class="">Certificaciones</a></li>
+                                                <li><a href="CertificadoServlet" class="">Certificaciones</a></li>
+                                                <li><a href="CapacitacionesServlet" class="">Capacitaciones</a></li>
                                         </ul>
                                 </div>
                             </li>

@@ -33,10 +33,12 @@ public class loginServlet extends HttpServlet {
                         if (getUserSession != null && getUserSession.size() > 0) {
                             session.setAttribute("correoInSession", correo);
                             session.setAttribute("claveInSession", clave);
+                            session.setAttribute("userSessionName", getUserSession.get(0).getNombre());
                             request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
                         } else {
                             session.setAttribute("correoInSession", null);
                             session.setAttribute("claveInSession", null);
+                            session.setAttribute("userSessionName", null);
                             request.setAttribute("mensajes", "Usuario y/o contraseña incorrectos");
                             request.getRequestDispatcher("/index.jsp").forward(request, response);                        
                         }

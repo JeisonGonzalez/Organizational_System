@@ -1,28 +1,29 @@
 package Entidades;
 public class Areas {
     
-    String IdAreas ;
-    String Nombre;
-    String Descripcion;
-    String Area_Padre;
+    private String IdArea ;
+    private String Nombre;
+    private String Descripcion;
+    private String Area_Padre;
+    private String Nombre_Padre;
 
-    public Areas(String IdAreas, String Nombre, String Descripcion, String Area_Padre) {
-        this.IdAreas = IdAreas;
+    public Areas() {
+    }
+
+    public Areas(String IdArea, String Nombre, String Descripcion, String Area_Padre, String Nombre_Padre) {
+        this.IdArea = IdArea;
         this.Nombre = Nombre;
         this.Descripcion = Descripcion;
         this.Area_Padre = Area_Padre;
+        this.Nombre_Padre = Nombre_Padre;
     }
 
-    public Areas() {
-        
+    public String getIdArea() {
+        return IdArea;
     }
 
-    public String getIdAreas() {
-        return IdAreas;
-    }
-
-    public void setIdAreas(String IdAreas) {
-        this.IdAreas = IdAreas;
+    public void setIdArea(String IdArea) {
+        this.IdArea = IdArea;
     }
 
     public String getNombre() {
@@ -47,5 +48,14 @@ public class Areas {
 
     public void setArea_Padre(String Area_Padre) {
         this.Area_Padre = Area_Padre;
-    }                
+    }
+
+    public String getNombre_Padre() {
+        return Nombre_Padre;
+    }
+
+    public void setNombre_Padre(String Nombre_Padre) {
+        this.Nombre_Padre = Nombre_Padre;
+    }
+    
 }

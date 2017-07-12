@@ -28,24 +28,28 @@ public class UsuarioSrvlet extends HttpServlet {
         UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
         
         try {
-            if (submit != null && !submit.isEmpty()) {
-                if ("Eliminar".equals(submit)) {
-                    if (idUsuario != null && idUsuario > 0) {
-                        mensajes = usuarioNegocio.deleteUser(idUsuario);
-                        success = "true";
-                    } else {
-                        mensajes = "Debe ingresar la identificación del usuario a eliminar";
-                        success = "false";
-                    }
-                } else {
-                    if ("Guardar".equals(submit)) {
-                        if (idUsuario != null && idUsuario > 0) {
-                            mensajes = usuarioNegocio.updateUser(idUsuario, nombreUsuario, clave, correoUsuario, 1, fechaNacimiento, "");
-                        } else {
-                            mensajes = usuarioNegocio.insertUser(nombreUsuario, clave, correoUsuario, 1, fechaNacimiento, "");
+            if (submit != null) {
+                switch (submit) {
+                    case "Guardar":
+                        {
+                            if (idUsuario != null && idUsuario > 0) {
+                                mensajes = usuarioNegocio.updateUser(idUsuario, nombreUsuario, clave, correoUsuario, 1, fechaNacimiento, "");
+                            } else {
+                                mensajes = usuarioNegocio.insertUser(nombreUsuario, clave, correoUsuario, 1, fechaNacimiento, "");
+                            }
+                            break;
+                        }
+                    case "Eliminar":
+                        {
+                            if (idUsuario != null && idUsuario > 0) {
+                                mensajes = usuarioNegocio.deleteUser(idUsuario);
+                                success = "true";
+                            } else {
+                                mensajes = "Debe ingresar la identificación del usuario a eliminar";
+                                success = "false";
+                            }
                         }
                     }
-                }
             }
         } catch (NumberFormatException | SQLException e) {
             System.out.println("Error ejecutando submit en usuarioServlet : " + e);
@@ -60,19 +64,20 @@ public class UsuarioSrvlet extends HttpServlet {
         } catch (NumberFormatException e) {
             System.out.println("Error seteando atributo en opción Listar usuario : " + e);
         }
+        
         request.setAttribute("success", success);
         request.setAttribute("mensajes", mensajes);
         request.getRequestDispatcher("/Empleado.jsp").forward(request, response);
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }

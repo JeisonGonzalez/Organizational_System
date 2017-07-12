@@ -1,30 +1,25 @@
 <%-- 
-    Document   : Empleado
-    Created on : 26/03/2017, 10:13:50 AM
+    Document   : perfiles
+    Created on : 2/07/2017, 11:23:21 PM
     Author     : Jeison
 --%>
 
+<%@page import="Entidades.Areas"%>
 <%@page import="java.util.List"%>
-<%@page import="Entidades.Usuario"%>
+<%@page import="Entidades.Perfil"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
 //  Se obtienen datos provenientes del servlet y se guardan en variables para ser usadas en la JSP.
-    String nombreUsuario = request.getAttribute("nombreUsuario") != null ? request.getAttribute("nombreUsuario").toString() : null;
-    String cargoUsuario = request.getAttribute("cargoUsuario") != null ? request.getAttribute("cargoUsuario").toString() : null;
-    String fechaNacimiento = request.getAttribute("fechaNacimiento") != null ? request.getAttribute("fechaNacimiento").toString() : null;
-    String correoUsuario = request.getAttribute("correoUsuario") != null ? request.getAttribute("correoUsuario").toString() : null;
     String mensajes = request.getAttribute("mensajes") != null ? request.getAttribute("mensajes").toString() : null;
-    String claveUsuario = request.getAttribute("claveUsuario") != null ? request.getAttribute("claveUsuario").toString() : null;
-    String codigoUsuario = request.getAttribute("codigoUsuario") != null ? request.getAttribute("codigoUsuario").toString() : null;
-    String idUsuario = request.getAttribute("idUsuario") != null ? request.getAttribute("idUsuario").toString() : null;
     String success = request.getAttribute("success") != null ? request.getAttribute("success").toString() : null;
-    List<Usuario> listadoEmpleado = (List<Usuario>) request.getAttribute("listadoEmpleado");
+    List<Perfil> listadoPerfil = (List<Perfil>) request.getAttribute("listadoPerfil");
+    List<Areas> listadoAreas = (List<Areas>) request.getAttribute("listadoAreas");
 %>
     <!DOCTYPE html>
     <html lang="en">
 
     <head>
-        <title>Empleados | Organizational System</title>
+        <title>Perfiles | Organizational System</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -52,13 +47,15 @@
                     <%@include file="menuHorizontal.jsp"  %>
                         <!-- Contenido principal -->
                         <div class="main-content">
-                            <form method="post" action="./UsuarioSrvlet">
+                            <form method="post" action="./PerfilesServlet">
                                 <div class="container-fluid">
                                     <div class="row">
-                                        <div class="col-xs-12">                                              
+                                        <div class="col-xs-12">
                                             <%if (mensajes != null && !mensajes.isEmpty()) {%>
-                                                <%if (success != null && success.equals("true")) {%>     
+                                                <%if (success != null && success.equals("success")) {%>     
                                                     <div class="alert alert-success alert-dismissible" role="alert">
+                                                <% } else if (success != null && success.equals("warning")) { %>
+                                                    <div class="alert alert-warning alert-dismissible" role="alert">
                                                 <% } else { %>
                                                     <div class="alert alert-danger alert-dismissible" role="alert">
                                                 <% } %>
@@ -69,29 +66,29 @@
                                             <!-- Tabla de empleados -->
                                             <div class="panel">
                                                 <div class="panel-heading">
-                                                    <h3 class="panel-title">Empleados<h3>
+                                                    <h3 class="panel-title">Perfiles<h3>
                                                 </div>
                                                 <div class="panel-body">
-                                                    <%if (listadoEmpleado != null && !listadoEmpleado.isEmpty()) {%> 
+                                                    <%if (listadoPerfil != null && !listadoPerfil.isEmpty()) {%> 
                                                         <div style="overflow-x: auto;">
                                                             <table class="table table-hover">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Código interno</th>
-                                                                        <th>Nombre completo</th>
-                                                                        <th>Correo electrónico</th>
-                                                                        <th>Perfil ocupacional</th>
-                                                                        <th>Fecha de nacimiento</th>
+                                                                        <th>Nombre</th>
+                                                                        <th>Descripción</th>
+                                                                        <th>Área</th>
+                                                                        <th>Perfil padre</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    <% for (Usuario empleado : listadoEmpleado) {%>
-                                                                        <tr onclick="cargarFormulario('<%=empleado.getIdUsuario()%>','<%=empleado.getNombre()%>','<%=empleado.getClave()%>','<%=empleado.getCorreo()%>','<%=empleado.getIdPerfil()%>','<%=empleado.getFechaNacimiento()%>');">
-                                                                            <td><%=empleado.getIdUsuario()%></td>
-                                                                            <td><%=empleado.getNombre()%></td>
-                                                                            <td><%=empleado.getCorreo()%></td>
-                                                                            <td><%=empleado.getIdPerfil()%></td>
-                                                                            <td><%=empleado.getFechaNacimiento()%></td>
+                                                                    <% for (Perfil perfil : listadoPerfil) {%>
+                                                                        <tr onclick="cargarFormulario('<%=perfil.getIdPerfil()%>','<%=perfil.getNombre()%>','<%=perfil.getDescripcion()%>','<%=perfil.getIdArea()%>','<%=perfil.getIdPadre()%>');">
+                                                                            <td><%=perfil.getIdPerfil()%></td>
+                                                                            <td><%=perfil.getNombre()%></td>
+                                                                            <td><%=perfil.getDescripcion()%></td>
+                                                                            <td><%=perfil.getNombre_area()%></td>
+                                                                            <td><%=perfil.getNombre_padre()%></td>
                                                                         </tr>
                                                                     <%}%>
                                                                 </tbody>
@@ -105,59 +102,75 @@
                                                     <%}%>
                                                     <br>
                                                     <div class="input-group">
-                                                        <input class="form-control" id="search" name="search" placeholder="Buscar empleado por nombre o correo electrónico ..." type="text">
+                                                        <input class="form-control" id="search" name="search" placeholder="Buscar perfil por código interno, nombre o descripción ..." type="text">
                                                         <span class="input-group-btn"><button class="btn btn-primary" type="submit" name="submit" value="Buscar">Buscar</button></span>
                                                     </div>
                                                     <br>
                                                     <p class="demo-button">
-                                                        <button onclick="cargarFormulario('','','','',0,'')" type="button" class="btn btn-success"><i class="fa fa-check-circle"></i> Nuevo</button>
+                                                        <button onclick="cargarFormulario('','','',0,-2)" type="button" class="btn btn-success"><i class="fa fa-check-circle"></i> Nuevo</button>
                                                     </p>
                                                 </div>
                                             </div>
 
                                             <!-- Formulario Empleado -->
-                                            <div class="modal fade" id="modalEmpleado" role="dialog">
+                                            <div class="modal fade" id="modalPerfil" role="dialog">
                                                 <div class="modal-dialog">
                                                     <!-- Modal content-->
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                            <h4 class="modal-title">Formulario de empleado</h4>
+                                                            <h4 class="modal-title">Formulario de pefiles</h4>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <div id="input-group-idUsuario" class="input-group hide">
-                                                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                                                <input class="form-control" id="idUsuario" name="idUsuario" value="<%=idUsuario==null?"":idUsuario%>" placeholder="Código interno del empleado" type="number">
+                                                            <div class="form-group hide">
+                                                                <label for="idPerfil" class="col-xs-12 no-padding">Código interno</label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><i class="fa fa-certificate"></i></span>
+                                                                    <input class="form-control" type="text" Id="idPerfil" name="idPerfil"/>
+                                                                </div>
                                                             </div>
-                                                            <br>
-                                                            <div class="input-group">
-                                                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                                                <input class="form-control" id="nombreUsuario" name="nombreUsuario" value="<%=nombreUsuario==null?"":nombreUsuario%>" placeholder="Nombre completo" type="text">
+                                                            <div class="form-group">
+                                                                <label for="nombre" class="col-xs-12 no-padding">* Nombre de perfíl</label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                                    <input class="form-control" type="text" id="nombre" name="nombre" required="Campo obligatorio"/>
+                                                                </div>
                                                             </div>
-                                                            <br>
-                                                            <div class="input-group">
-                                                                <span class="input-group-addon"><i class="fa fa-certificate"></i></span>
-                                                                <input class="form-control" maxlength="8" id="claveUsuario" name="claveUsuario" value="<%=claveUsuario==null?"":claveUsuario%>" placeholder="Contraseña para el ingreso del empleado al sistema" type="password">
+                                                            <div class="form-group">
+                                                                <label for="descripcion" class="col-xs-12 no-padding">* Descripción de perfíl</label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><i class="fa fa-bars"></i></span>
+                                                                    <input class="form-control" type="text" id="descripcion" name="descripcion" required="Campo obligatorio"/>
+                                                                </div>
                                                             </div>
-                                                            <br>
-                                                            <div class="input-group">
-                                                                <span class="input-group-addon"><i class="fa fa-mail-forward"></i></span>
-                                                                <input class="form-control" id="correoUsuario" name="correoUsuario" value="<%=correoUsuario==null?"":correoUsuario%>" placeholder="Correo electrónico" type="email">
+                                                            <div class="form-group">
+                                                                <label for="idArea" class="col-xs-12 no-padding">* Área</label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><i class="fa fa-group"></i></span>
+                                                                    <select class="form-control" id="idArea" name="idArea" required="Campo obligatorio">
+                                                                            <option value="0">Seleccione un área</option>
+                                                                            <%if (listadoAreas != null && !listadoAreas.isEmpty()) {%>                                                                   
+                                                                                <% for (Areas area : listadoAreas) {%>
+                                                                                    <option value="<%=area.getIdArea()%>"><%=area.getNombre()%></option>
+                                                                                <%}%>
+                                                                            <%}%>
+                                                                    </select>
+                                                                </div>
                                                             </div>
-                                                            <br>
-                                                            <div class="input-group">
-                                                                <span class="input-group-addon"><i class="fa fa-male"></i></span>
-                                                                <select class="form-control" id="cargoUsuario" name="cargoUsuario">
-                                                                    <option value="0">Cargo que desempeña el empleado</option>
-                                                                    <option value="1">Administrador</option>
-                                                                </select>
+                                                            <div class="form-group">
+                                                                <label for="idPadre" class="col-xs-12 no-padding">Perfil padre (Si aplica)</label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><i class="fa fa-male"></i></span>
+                                                                    <select class="form-control" id="idPadre" name="idPadre">
+                                                                            <option value="-2">Seleccione un perfil</option>
+                                                                            <%if (listadoPerfil != null && !listadoPerfil.isEmpty()) {%>                                                                
+                                                                                <% for (Perfil perfil : listadoPerfil) {%>
+                                                                                    <option value="<%=perfil.getIdPerfil()%>"><%=perfil.getNombre()%></option>
+                                                                                <%}%>
+                                                                            <%}%>
+                                                                    </select>
+                                                                </div>
                                                             </div>
-                                                            <br>
-                                                            <div class="input-group">
-                                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                                <input class="form-control" id="fechaNacimiento" name="fechaNacimiento" value="<%=fechaNacimiento==null?"":fechaNacimiento%>" placeholder="Fecha de nacimiento" type="text">
-                                                            </div>
-                                                            <br>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <p class="demo-button">
@@ -186,7 +199,7 @@
                 <script src="assets/js/bootstrap/bootstrap.min.js"></script>
                 <script src="assets/js/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
                 <script src="assets/js/klorofil.min.js"></script>
-                <script src="js/Empleado.js"></script>
+                <script src="js/Perfil.js"></script>
     </body>
 
     </html>

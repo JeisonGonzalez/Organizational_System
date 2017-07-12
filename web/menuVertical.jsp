@@ -58,6 +58,7 @@
                                 <div id="subPagesControl" class="collapse ">
                                         <ul class="nav">
                                                 <li><a href="CertificadoServlet" class="">Certificaciones</a></li>
+                                                <li><a href="CapacitacionesServlet" class="">Capacitaciones</a></li>
                                         </ul>
                                 </div>
                             </li>

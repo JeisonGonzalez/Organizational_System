@@ -161,13 +161,15 @@ public class SQLHelpers {
     }
     
     public static String getCertificado(String id) {
+        int busc = Integer.parseInt(id);
         return "SELECT  idCertificacion,nombre,descripcion,avance,estado"
-                + " FROM certificacion where idCertificacion ='" + id + "' ";
+                + " FROM certificacion where idCertificacion ='" + busc + "' ";
     }
     
     public static String getCertificadoget(String id) {
+        int busc = Integer.parseInt(id);
         return "SELECT *"
-                + " FROM certificacion where idCertificacion ='" + id + "' ";
+                + " FROM certificacion where idCertificacion ='" + busc + "' ";
     }
     
     public static String insertarCertificado() {
@@ -181,4 +183,29 @@ public class SQLHelpers {
     }
     
     
+    //-------------------------Capacitaciones----------------------
+    public static String getCapacitacion() {
+        return "SELECT  idCapacitacion,idArea,nombre,descripcion,estado,fecha"
+                + " FROM capacitacion";
+    }
+    
+    public static String getCapacitacion(String id) {
+        int busc = Integer.parseInt(id);
+        return "SELECT  idCapacitacion,idArea,nombre,descripcion,estado,fecha FROM capacitacion where idCapacitacion ='" + busc + "' ";
+    }
+    
+    public static String getCapacitacionget(String id) {
+        int busc = Integer.parseInt(id);
+        return "SELECT idCapacitacion,idArea,nombre,descripcion,estado,fecha FROM capacitacion where idCapacitacion ='" + busc + "' ";
+    }
+    
+    public static String insertarCapacitacion() {
+        return "INSERT INTO capacitacion(idCapacitacion,idArea,nombre,descripcion,estado,fecha)"
+                + "values(?,?,?,?,?,?)";
+    }
+    
+    public static String eliminarCapacitacion() {
+        return "DELETE FROM capacitacion"
+                + " WHERE idCapacitacion=?";
+    }
 }

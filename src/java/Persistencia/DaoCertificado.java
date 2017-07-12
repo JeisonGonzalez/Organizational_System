@@ -65,11 +65,6 @@ public class DaoCertificado {
                 certificado.setEstado(registros.getString(5));
             }// fin mientras
         } catch (Exception e) {
-        } finally {
-            try {
-                con.close();
-            } catch (Exception cl) {
-            }
         }
         return certificado;
     }
